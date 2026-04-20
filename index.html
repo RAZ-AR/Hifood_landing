@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="sr-Latn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hi Food — Uskoro u Beogradu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cyan: #00b3eb;
+      --black: #080808;
+      --white: #f5f5f0;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Space Grotesk', sans-serif;
+      cursor: none;
+    }
+
+    /* ── Custom cursor ── */
+    .cursor {
+      position: fixed; width: 10px; height: 10px;
+      background: var(--cyan); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: difference;
+    }
+    .cursor-ring {
+      position: fixed; width: 36px; height: 36px;
+      border: 1.5px solid var(--cyan); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%); opacity: 0.55;
+    }
+
+    /* ══════════════════ HERO ══════════════════ */
+    .hero {
+      position: relative;
+      width: 100vw; height: 100vh;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* Grain overlay */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 2;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+      background-size: 180px; pointer-events: none; opacity: 0.35;
+    }
+
+    /* Vignette */
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0; z-index: 2;
+      background: radial-gradient(ellipse at center, transparent 20%, rgba(8,8,8,0.72) 100%);
+      pointer-events: none;
+    }
+
+    /* ── Video ── */
+    .video-wrapper { position: absolute; inset: 0; z-index: 1; }
+    .video-wrapper video {
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: 0.6; filter: saturate(0.65) contrast(1.1);
+    }
+
+    /* ── Logo (top-left) ── */
+    .logo-wrap {
+      position: absolute;
+      top: clamp(18px, 3vw, 40px);
+      left: clamp(18px, 3vw, 44px);
+      width: clamp(90px, 11vw, 155px);
+      z-index: 5;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.2s;
+    }
+    .logo-wrap img {
+      width: 100%; height: auto;
+      filter: drop-shadow(0 0 28px rgba(0,179,235,0.45));
+    }
+
+    /* ── Vertical USKORO sides ── */
+    .side-word {
+      position: absolute; z-index: 3;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(56px, 8vw, 118px);
+      line-height: 1; letter-spacing: 0.08em;
+      color: var(--white);
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      top: 50%;
+      opacity: 0; user-select: none; pointer-events: none;
+    }
+    .side-word span { color: var(--cyan); }
+    .side-left {
+      left: clamp(10px, 2vw, 34px);
+      transform: translateY(-50%) rotate(180deg);
+      animation: fadeIn 1s ease forwards 0.6s;
+    }
+    .side-right {
+      right: clamp(10px, 2vw, 34px);
+      transform: translateY(-50%);
+      animation: fadeIn 1s ease forwards 0.8s;
+    }
+
+    /* ── Center tagline ── */
+    .hero-center {
+      position: relative; z-index: 3;
+      display: flex; flex-direction: column;
+      align-items: center; text-align: center;
+      gap: 0;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 1s;
+    }
+    .tagline {
+      font-size: clamp(10px, 1.2vw, 14px);
+      font-weight: 700; letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(245,245,240,0.65);
+    }
+    .tagline-line {
+      display: flex; align-items: center; gap: 16px; margin-bottom: 6px;
+    }
+    .tagline-line::before,
+    .tagline-line::after {
+      content: '';
+      width: clamp(30px, 6vw, 90px); height: 1px;
+      background: var(--cyan); opacity: 0.5;
+    }
+
+    /* ── Sticker badges ── */
+    .badge {
+      position: absolute; z-index: 4;
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.07em; line-height: 1.15;
+      pointer-events: none; border-radius: 999px;
+    }
+
+    /* badge-1: Grand Open — next to logo */
+    .badge-1 {
+      top: clamp(24px, 3.5vw, 48px);
+      left: clamp(128px, 16vw, 222px);
+      background: var(--cyan); color: var(--black);
+      font-size: clamp(13px, 1.6vw, 20px);
+      padding: 12px 22px;
+      opacity: 0;
+      animation: fadeIn 0.7s ease forwards 1.3s, badgeFloat1 5s ease-in-out infinite 2.1s;
+    }
+
+    /* badge-2: Beograd 2026 — top right */
+    .badge-2 {
+      top: clamp(24px, 3.5vw, 48px);
+      right: clamp(70px, 9vw, 130px);
+      border: 2px solid rgba(245,245,240,0.55); color: var(--white);
+      background: transparent;
+      font-size: clamp(11px, 1.3vw, 17px);
+      padding: 11px 20px; border-radius: 8px;
+      opacity: 0;
+      animation: fadeIn 0.7s ease forwards 1.6s, badgeFloat2 6s ease-in-out infinite 2.4s;
+    }
+
+    /* badge-3: Kavkaski ukusi — bottom left */
+    .badge-3 {
+      bottom: clamp(120px, 15vh, 200px);
+      left: clamp(60px, 8vw, 110px);
+      background: transparent; border: 2px solid var(--cyan); color: var(--cyan);
+      font-size: clamp(11px, 1.4vw, 18px);
+      padding: 11px 22px; border-radius: 6px;
+      opacity: 0;
+      animation: fadeIn 0.7s ease forwards 1.9s, badgeFloat3 7s ease-in-out infinite 2.7s;
+    }
+
+    /* badge-4: menu — bottom right */
+    .badge-4 {
+      bottom: clamp(130px, 16vh, 210px);
+      right: clamp(60px, 8vw, 110px);
+      background: var(--white); color: var(--black);
+      font-size: clamp(11px, 1.3vw, 16px);
+      padding: 11px 22px; border-radius: 6px;
+      opacity: 0;
+      animation: fadeIn 0.7s ease forwards 2.2s, badgeFloat4 5.5s ease-in-out infinite 3s;
+    }
+    .dot {
+      display: inline-block; width: 4px; height: 4px;
+      background: var(--cyan); border-radius: 50%;
+      margin: 0 5px; vertical-align: middle;
+    }
+
+    /* ── Bottom info bar ── */
+    .info-bar {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 5;
+      padding: clamp(20px, 3vh, 36px) clamp(20px, 4vw, 60px);
+      background: linear-gradient(to top, rgba(8,8,8,0.9) 0%, transparent 100%);
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: end; gap: 20px;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards 2.4s;
+    }
+
+    /* Address — left */
+    .info-address {
+      display: flex; flex-direction: column; gap: 5px;
+      text-decoration: none;
+    }
+    .info-address .label {
+      font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+      color: rgba(245,245,240,0.35);
+    }
+    .info-address .value {
+      display: flex; align-items: center; gap: 7px;
+      font-size: clamp(12px, 1.2vw, 15px);
+      font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(245,245,240,0.8);
+      transition: color 0.25s;
+    }
+    .info-address .value svg { opacity: 0.6; flex-shrink: 0; transition: opacity 0.25s; }
+    .info-address:hover .value { color: var(--cyan); }
+    .info-address:hover .value svg { opacity: 1; }
+
+    /* Menu pills — center */
+    .info-menu {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+    }
+    .info-menu .menu-label {
+      font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+      color: rgba(245,245,240,0.3);
+    }
+    .info-menu .menu-pills {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center;
+    }
+    .pill {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(12px, 1.3vw, 16px);
+      letter-spacing: 0.12em;
+      padding: 6px 14px;
+      border: 1px solid rgba(245,245,240,0.15);
+      border-radius: 999px;
+      color: rgba(245,245,240,0.6);
+      white-space: nowrap;
+    }
+    .pill.active {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    /* Instagram — right */
+    .info-ig {
+      display: flex; flex-direction: column; align-items: flex-end; gap: 5px;
+      text-decoration: none;
+    }
+    .info-ig .label {
+      font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+      color: rgba(245,245,240,0.35);
+    }
+    .info-ig .value {
+      display: flex; align-items: center; gap: 8px;
+      font-size: clamp(12px, 1.2vw, 15px);
+      font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(245,245,240,0.8);
+      transition: color 0.25s;
+    }
+    .info-ig .value img { transition: transform 0.3s; flex-shrink: 0; }
+    .info-ig:hover .value { color: var(--cyan); }
+    .info-ig:hover .value img { transform: scale(1.12); }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes badgeFloat1 {
+      0%   { transform: rotate(-7deg) translateY(0); }
+      40%  { transform: rotate(-5deg) translateY(-8px) scale(1.04); }
+      100% { transform: rotate(-7deg) translateY(0); }
+    }
+    @keyframes badgeFloat2 {
+      0%   { transform: rotate(5deg) translateY(0); }
+      45%  { transform: rotate(3deg) translateY(-9px); }
+      100% { transform: rotate(5deg) translateY(0); }
+    }
+    @keyframes badgeFloat3 {
+      0%   { transform: rotate(3deg) translateX(0); }
+      40%  { transform: rotate(5deg) translateX(6px) scale(1.04); }
+      100% { transform: rotate(3deg) translateX(0); }
+    }
+    @keyframes badgeFloat4 {
+      0%   { transform: rotate(-4deg) translateY(0); }
+      50%  { transform: rotate(-6deg) translateY(-8px) scale(1.03); }
+      100% { transform: rotate(-4deg) translateY(0); }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .info-bar { grid-template-columns: 1fr 1fr; }
+      .info-menu { display: none; }
+      .side-word { font-size: clamp(40px, 10vw, 70px); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ══════════════════ SINGLE PAGE HERO ══════════════════ -->
+  <section class="hero">
+
+    <!-- Video background -->
+    <div class="video-wrapper">
+      <video autoplay muted loop playsinline preload="auto">
+        <source src="Hi_food.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <!-- Logo — top left -->
+    <div class="logo-wrap">
+      <img src="Logo.svg" alt="Hi Food logo">
+    </div>
+
+    <!-- Vertical USKORO -->
+    <div class="side-word side-left">US<span>KO</span>RO</div>
+    <div class="side-word side-right">US<span>KO</span>RO</div>
+
+    <!-- Floating sticker badges -->
+    <div class="badge badge-1">Grand Open</div>
+    <div class="badge badge-2">Beograd<br>2026</div>
+    <div class="badge badge-3">Kavkaski ukusi</div>
+    <div class="badge badge-4">Šašlik<span class="dot"></span>Šavarma<span class="dot"></span>Napitci</div>
+
+    <!-- Center tagline -->
+    <div class="hero-center">
+      <div class="tagline-line">
+        <span class="tagline">Nešto dolazi u Beograd</span>
+      </div>
+    </div>
+
+    <!-- Bottom info bar -->
+    <div class="info-bar">
+
+      <!-- Address -->
+      <a href="https://maps.google.com/?q=Križanićeva+1A,+Beograd,+Srbija"
+         target="_blank" rel="noopener" class="info-address">
+        <span class="label">Adresa</span>
+        <span class="value">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.5"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          Križanićeva 1A, Beograd
+        </span>
+      </a>
+
+      <!-- Menu pills -->
+      <div class="info-menu">
+        <span class="menu-label">Na meniju</span>
+        <div class="menu-pills">
+          <span class="pill active">Šašlik</span>
+          <span class="pill">Šavarma</span>
+          <span class="pill">Napitci</span>
+        </div>
+      </div>
+
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/hi_food_bg"
+         target="_blank" rel="noopener" class="info-ig">
+        <span class="label">Pratite nas</span>
+        <span class="value">
+          <img src="Instagram_logo_2022.svg" alt="Instagram" width="18" height="18">
+          @hi_food_bg
+        </span>
+      </a>
+
+    </div>
+
+  </section>
+
+  <script>
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    const ring   = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top  = my + 'px';
+    });
+
+    (function loop() {
+      rx += (mx - rx) * 0.11;
+      ry += (my - ry) * 0.11;
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+      requestAnimationFrame(loop);
+    })();
+  </script>
+</body>
+</html>
