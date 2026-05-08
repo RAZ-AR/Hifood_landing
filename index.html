@@ -136,6 +136,24 @@
       background: var(--cyan); opacity: 0.5;
     }
 
+    /* ── Wolt CTA button ── */
+    .wolt-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #fff;
+      color: var(--black);
+      text-decoration: none;
+      border-radius: 999px;
+      padding: clamp(10px, 1.2vh, 14px) clamp(18px, 2.2vw, 30px);
+      font-size: clamp(11px, 1.1vw, 14px);
+      font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: clamp(18px, 2.8vh, 32px);
+      transition: filter 0.2s, transform 0.2s;
+      cursor: none;
+    }
+    .wolt-btn:hover { filter: brightness(0.92); transform: scale(1.05); }
+    .wolt-btn img { height: clamp(14px, 1.5vw, 19px); width: auto; display: block; }
+
     /* ── Sticker badges ── */
     .badge {
       position: absolute; z-index: 4;
@@ -345,6 +363,11 @@
       <div class="tagline-line">
         <span class="tagline">Već smo otvoreni u Beogradu</span>
       </div>
+      <a href="https://wolt.com/sr/srb/belgrade/restaurant/hifood"
+         target="_blank" rel="noopener" class="wolt-btn">
+        <span>Kupujte na</span>
+        <img src="wolt.svg" alt="Wolt">
+      </a>
     </div>
 
     <!-- Bottom info bar -->
