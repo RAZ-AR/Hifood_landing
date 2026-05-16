@@ -137,7 +137,11 @@
       background: var(--cyan); opacity: 0.5;
     }
 
-    /* ── Wolt CTA button ── */
+    /* ── CTA buttons ── */
+    .cta-group {
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center;
+      margin-top: clamp(18px, 2.8vh, 32px);
+    }
     .wolt-btn {
       display: inline-flex; align-items: center; gap: 10px;
       background: #fff;
@@ -148,12 +152,27 @@
       font-size: clamp(11px, 1.1vw, 14px);
       font-weight: 700; letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-top: clamp(18px, 2.8vh, 32px);
       transition: filter 0.2s, transform 0.2s;
       cursor: none;
     }
     .wolt-btn:hover { filter: brightness(0.92); transform: scale(1.05); }
     .wolt-btn img { height: clamp(16px, 1.8vw, 22px); width: auto; display: block; filter: brightness(0); }
+
+    .menu-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent;
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 999px;
+      border: 1.5px solid rgba(245,245,240,0.35);
+      padding: clamp(10px, 1.2vh, 14px) clamp(18px, 2.2vw, 30px);
+      font-size: clamp(11px, 1.1vw, 14px);
+      font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+      cursor: none;
+    }
+    .menu-btn:hover { border-color: var(--cyan); color: var(--cyan); transform: scale(1.05); }
 
     /* ── Sticker badges ── */
     .badge {
@@ -364,11 +383,26 @@
       <div class="tagline-line">
         <span class="tagline">Već smo otvoreni u Beogradu</span>
       </div>
-      <a href="https://wolt.com/sr/srb/belgrade/restaurant/hifood"
-         target="_blank" rel="noopener" class="wolt-btn">
-        <span>Kupujte na</span>
-        <img src="wolt.svg" alt="Wolt">
-      </a>
+      <div class="cta-group">
+        <a href="https://wolt.com/sr/srb/belgrade/restaurant/hifood"
+           target="_blank" rel="noopener" class="wolt-btn">
+          <span>Kupujte na</span>
+          <img src="wolt.svg" alt="Wolt">
+        </a>
+        <a href="menu.html" class="menu-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.5"
+               stroke-linecap="round" stroke-linejoin="round">
+            <line x1="8" y1="6" x2="21" y2="6"/>
+            <line x1="8" y1="12" x2="21" y2="12"/>
+            <line x1="8" y1="18" x2="21" y2="18"/>
+            <line x1="3" y1="6" x2="3.01" y2="6"/>
+            <line x1="3" y1="12" x2="3.01" y2="12"/>
+            <line x1="3" y1="18" x2="3.01" y2="18"/>
+          </svg>
+          Naš Meni
+        </a>
+      </div>
     </div>
 
     <!-- Bottom info bar -->

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="sr-Latn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hi Food — Meni</title>
+  <link rel="icon" type="image/svg+xml" href="Logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cyan: #00b3eb;
+      --black: #080808;
+      --white: #f5f5f0;
+    }
+
+    html, body {
+      width: 100%;
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Space Grotesk', sans-serif;
+      cursor: none;
+      overflow-x: hidden;
+    }
+
+    /* ── Custom cursor ── */
+    .cursor {
+      position: fixed; width: 10px; height: 10px;
+      background: var(--cyan); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: difference;
+    }
+    .cursor-ring {
+      position: fixed; width: 36px; height: 36px;
+      border: 1.5px solid var(--cyan); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%); opacity: 0.55;
+    }
+
+    /* ── Fixed video background ── */
+    .video-bg {
+      position: fixed; inset: 0; z-index: 0;
+      overflow: hidden;
+    }
+    .video-bg video {
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: 0.85; filter: saturate(1.1) contrast(1.05);
+    }
+    /* Grain */
+    .video-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+      background-size: 180px; pointer-events: none; opacity: 0.3;
+    }
+
+    /* ── Header ── */
+    .header {
+      position: sticky; top: 0; z-index: 10;
+      padding: clamp(14px, 2vh, 22px) clamp(20px, 4vw, 60px);
+      display: flex; align-items: center; justify-content: space-between;
+      background: transparent;
+    }
+
+    .logo-wrap {
+      width: clamp(70px, 9vw, 120px);
+    }
+    .logo-wrap img {
+      width: 100%; height: auto;
+      filter: drop-shadow(0 0 18px rgba(0,179,235,0.4));
+    }
+
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: rgba(245,245,240,0.55);
+      text-decoration: none;
+      font-size: clamp(11px, 1.1vw, 13px);
+      font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      cursor: none;
+    }
+    .back-btn:hover { color: var(--cyan); }
+    .back-btn svg { transition: transform 0.2s; }
+    .back-btn:hover svg { transform: translateX(-4px); }
+
+    /* ── Scrollable content wrapper ── */
+    .content-wrap {
+      position: relative; z-index: 2;
+      max-width: 980px;
+      margin: clamp(24px, 4vh, 48px) auto clamp(40px, 7vh, 80px);
+      padding: 0 clamp(16px, 3vw, 32px);
+    }
+    .glass-panel {
+      background: rgba(8,8,8,0.55);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(245,245,240,0.1);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    /* ── Page title ── */
+    .page-title {
+      position: relative; z-index: 1;
+      text-align: center;
+      padding: clamp(36px, 6vh, 64px) clamp(20px, 4vw, 60px) clamp(16px, 3vh, 32px);
+    }
+    .page-title .label {
+      font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase;
+      color: rgba(245,245,240,0.35); margin-bottom: 12px;
+    }
+    .page-title h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(52px, 10vw, 120px);
+      line-height: 0.9; letter-spacing: 0.04em;
+      color: var(--white);
+    }
+    .page-title h1 span { color: var(--cyan); }
+    .title-divider {
+      width: 60px; height: 2px;
+      background: var(--cyan);
+      margin: 20px auto 0;
+      opacity: 0.6;
+    }
+
+    /* ── Main content ── */
+    .menu-page {
+      position: relative; z-index: 1;
+      padding: 0 clamp(24px, 4vw, 60px) clamp(40px, 7vh, 64px);
+    }
+
+    /* ── Category section ── */
+    .category {
+      margin-bottom: clamp(48px, 8vh, 72px);
+    }
+    .category-header {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: clamp(20px, 3vh, 30px);
+    }
+    .category-header h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(28px, 4vw, 48px);
+      letter-spacing: 0.08em; color: var(--white);
+      white-space: nowrap;
+    }
+    .category-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(to right, rgba(245,245,240,0.15), transparent);
+    }
+
+    /* ── Menu item ── */
+    .menu-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 16px 24px;
+      padding: clamp(16px, 2.5vh, 22px) 0;
+      border-bottom: 1px solid rgba(245,245,240,0.07);
+    }
+    .menu-item:last-child { border-bottom: none; }
+
+    .item-info { display: flex; flex-direction: column; gap: 6px; }
+    .item-name {
+      font-size: clamp(14px, 1.4vw, 17px);
+      font-weight: 700; letter-spacing: 0.04em;
+      color: var(--white);
+    }
+    .item-desc {
+      font-size: clamp(12px, 1.1vw, 14px);
+      font-weight: 400; line-height: 1.55;
+      color: rgba(245,245,240,0.45);
+    }
+
+    .item-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(18px, 2.2vw, 26px);
+      letter-spacing: 0.06em;
+      color: var(--cyan);
+      white-space: nowrap;
+      padding-top: 2px;
+    }
+    .item-price sup {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.45em; font-weight: 700;
+      letter-spacing: 0.1em;
+      opacity: 0.7; vertical-align: super;
+    }
+
+    /* ── Footer ── */
+    .menu-footer {
+      position: relative; z-index: 1;
+      text-align: center;
+      padding: clamp(18px, 3vh, 28px) clamp(20px, 4vw, 60px);
+      border-top: 1px solid rgba(245,245,240,0.08);
+      font-size: 11px; letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,245,240,0.25);
+    }
+
+    /* ── Animations ── */
+    .category { opacity: 0; transform: translateY(20px); animation: fadeUp 0.6s ease forwards; }
+    .category:nth-child(1) { animation-delay: 0.1s; }
+    .category:nth-child(2) { animation-delay: 0.2s; }
+    .category:nth-child(3) { animation-delay: 0.3s; }
+    .category:nth-child(4) { animation-delay: 0.4s; }
+    .category:nth-child(5) { animation-delay: 0.5s; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .page-title {
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0s;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 540px) {
+      .menu-item { grid-template-columns: 1fr; gap: 8px; }
+      .item-price { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Fixed video background -->
+  <div class="video-bg">
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="Hi_food.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <a href="index.html" class="back-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2.5"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 5l-7 7 7 7"/>
+      </svg>
+      Nazad
+    </a>
+    <div class="logo-wrap">
+      <img src="Logo.svg" alt="Hi Food logo">
+    </div>
+    <div style="width:80px"></div>
+  </header>
+
+  <!-- Glass panel wrapping all content -->
+  <div class="content-wrap">
+    <div class="glass-panel">
+
+  <!-- Page title -->
+  <div class="page-title">
+    <p class="label">Hi Food — Beograd</p>
+    <h1>Naš <span>Meni</span></h1>
+    <div class="title-divider"></div>
+  </div>
+
+  <!-- Menu content -->
+  <main class="menu-page">
+
+    <!-- Ljula-kebab -->
+    <section class="category">
+      <div class="category-header">
+        <h2>Ljula-Kebab</h2>
+        <div class="category-line"></div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-info">
+          <span class="item-name">Ljula-kebab od piletine sa pomfritom</span>
+          <span class="item-desc">Sočan pileći ljula-kebab, pečen na ćumuru, serviran uz hrskav pomfrit.</span>
+        </div>
+        <div class="item-price">900 <sup>RSD</sup></div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-info">
+          <span class="item-name">Ljula-kebab od piletine sa sirom i pomfritom</span>
+          <span class="item-desc">Pileći ljula-kebab sa topljenim sirom, pečen na ćumuru, uz pomfrit.</span>
+        </div>
+        <div class="item-price">950 <sup>RSD</sup></div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-info">
+          <span class="item-name">Ljula-kebab od junetine sa pomfritom</span>
+          <span class="item-desc">Aromatičan ljula-kebab od junetine, bogatog ukusa, uz pomfrit.</span>
+        </div>
+        <div class="item-price">1350 <sup>RSD</sup></div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-info">
+          <span class="item-name">Ljula-kebab od junetine sa sirom i pomfritom</span>
+          <span class="item-desc">Sočan ljula-kebab od junetine sa sirom, pečen na ćumuru, uz pomfrit.</span>
+        </div>
+        <div class="item-price">1400 <sup>RSD</sup></div>
+      </div>
+    </section>
+
+    <!-- Šašlik -->
+    <section class="category">
+      <div class="category-header">
+        <h2>Šašlik</h2>
+        <div class="category-line"></div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-info">
+          <span class="item-name">Šašlik od svinjskih rebara</span>
+          <span class="item-desc">Marinirana svinjska rebra, pečena na ćumuru sa aromom dima.</span>
+        </div>
+        <div class="item-price">1150 <sup>RSD</sup></div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-info">
+          <span class="item-name">Šašlik od svinjskog vrata</span>
+          <span class="item-desc">Sočno svinjsko meso sa roštilja, bogatog ukusa i mekane teksture.</span>
+        </div>
+        <div class="item-price">1250 <sup>RSD</sup></div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-info">
+          <span class="item-name">Šašlik od pilećih krilaca</span>
+          <span class="item-desc">Hrskava krilca spolja, sočna iznutra, pečena na ćumuru.</span>
+        </div>
+        <div class="item-price">750 <sup>RSD</sup></div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-info">
+          <span class="item-name">Šašlik od pilećih prsa</span>
+          <span class="item-desc">Lagano i sočno belo meso, pečeno na ćumuru.</span>
+        </div>
+        <div class="item-price">800 <sup>RSD</sup></div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-info">
+          <span class="item-name">Šašlik od pilećeg bataka sa pomfritom</span>
+          <span class="item-desc">Sočan batak pečen na ćumuru, serviran uz pomfrit.</span>
+        </div>
+        <div class="item-price">800 <sup>RSD</sup></div>
+      </div>
+    </section>
+
+    <!-- Šaurma -->
+    <section class="category">
+      <div class="category-header">
+        <h2>Šaurma</h2>
+        <div class="category-line"></div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-info">
+          <span class="item-name">Šaurma sa piletinom L</span>
+          <span class="item-desc">Sočno pileće meso, sveže povrće i sos u toploj tortilji.</span>
+        </div>
+        <div class="item-price">490 <sup>RSD</sup></div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-info">
+          <span class="item-name">Šaurma sa svinjetinom L</span>
+          <span class="item-desc">Bogata kombinacija svinjskog mesa, povrća i aromatičnih soseva.</span>
+        </div>
+        <div class="item-price">490 <sup>RSD</sup></div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-info">
+          <span class="item-name">Šaurma sa piletinom XL</span>
+          <span class="item-desc">Sočno pileće meso, sveže povrće i sos u toploj tortilji.</span>
+        </div>
+        <div class="item-price">800 <sup>RSD</sup></div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-info">
+          <span class="item-name">Šaurma sa svinjetinom XL</span>
+          <span class="item-desc">Bogata kombinacija svinjskog mesa, povrća i aromatičnih soseva.</span>
+        </div>
+        <div class="item-price">800 <sup>RSD</sup></div>
+      </div>
+    </section>
+
+    <!-- Sosevi -->
+    <section class="category">
+      <div class="category-header">
+        <h2>Sosevi</h2>
+        <div class="category-line"></div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-info">
+          <span class="item-name">Sos – ljuti crveni</span>
+          <span class="item-desc">Pikantan crveni sos koji daje dodatnu jačinu ukusu.</span>
+        </div>
+        <div class="item-price">100 <sup>RSD</sup></div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-info">
+          <span class="item-name">Sos – beli (beli luk)</span>
+          <span class="item-desc">Kremasti sos sa belim lukom, savršen uz meso.</span>
+        </div>
+        <div class="item-price">100 <sup>RSD</sup></div>
+      </div>
+    </section>
+
+    <!-- Prilozi -->
+    <section class="category">
+      <div class="category-header">
+        <h2>Prilozi</h2>
+        <div class="category-line"></div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-info">
+          <span class="item-name">Pomfrit</span>
+          <span class="item-desc">Hrskav krompir pržen do zlatne boje.</span>
+        </div>
+        <div class="item-price">150 <sup>RSD</sup></div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-info">
+          <span class="item-name">Krompir na seljački način</span>
+          <span class="item-desc">Pečeni krompir sa začinima, rustičnog ukusa.</span>
+        </div>
+        <div class="item-price">150 <sup>RSD</sup></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="menu-footer">
+    Cene su iskazane u dinarima (RSD) sa PDV-om &nbsp;·&nbsp; Hi Food Beograd &nbsp;·&nbsp; Križanićeva 1A
+  </footer>
+
+    </div><!-- /.glass-panel -->
+  </div><!-- /.content-wrap -->
+
+  <script>
+    const cursor = document.getElementById('cursor');
+    const ring   = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top  = my + 'px';
+    });
+
+    (function loop() {
+      rx += (mx - rx) * 0.11;
+      ry += (my - ry) * 0.11;
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+      requestAnimationFrame(loop);
+    })();
+  </script>
+</body>
+</html>
