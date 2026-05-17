@@ -174,35 +174,25 @@
     }
     .menu-btn:hover { border-color: var(--cyan); color: var(--cyan); transform: scale(1.05); }
 
+    /* ── Top info bar (address + instagram) ── */
+    .top-bar {
+      position: absolute; top: 0; left: 0; right: 0; z-index: 5;
+      padding: clamp(18px, 3vw, 40px) clamp(20px, 4vw, 60px);
+      padding-left: clamp(130px, 17vw, 240px);
+      background: linear-gradient(to bottom, rgba(8,8,8,0.7) 0%, transparent 100%);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards 1.3s;
+    }
+
     /* ── Sticker badges ── */
     .badge {
       position: absolute; z-index: 4;
       font-family: 'Bebas Neue', sans-serif;
       letter-spacing: 0.07em; line-height: 1.15;
       pointer-events: none; border-radius: 999px;
-    }
-
-    /* badge-1: Grand Open — next to logo */
-    .badge-1 {
-      top: clamp(24px, 3.5vw, 48px);
-      left: clamp(128px, 16vw, 222px);
-      background: var(--cyan); color: var(--black);
-      font-size: clamp(13px, 1.6vw, 20px);
-      padding: 12px 22px;
-      opacity: 0;
-      animation: fadeIn 0.7s ease forwards 1.3s, badgeFloat1 5s ease-in-out infinite 2.1s;
-    }
-
-    /* badge-2: Beograd 2026 — top right */
-    .badge-2 {
-      top: clamp(24px, 3.5vw, 48px);
-      right: clamp(70px, 9vw, 130px);
-      border: 2px solid rgba(245,245,240,0.55); color: var(--white);
-      background: transparent;
-      font-size: clamp(11px, 1.3vw, 17px);
-      padding: 11px 20px; border-radius: 8px;
-      opacity: 0;
-      animation: fadeIn 0.7s ease forwards 1.6s, badgeFloat2 6s ease-in-out infinite 2.4s;
     }
 
     /* badge-3: Kavkaski ukusi — bottom left */
@@ -237,9 +227,9 @@
       position: absolute; bottom: 0; left: 0; right: 0; z-index: 5;
       padding: clamp(20px, 3vh, 36px) clamp(20px, 4vw, 60px);
       background: linear-gradient(to top, rgba(8,8,8,0.9) 0%, transparent 100%);
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: end; gap: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
       opacity: 0;
       animation: fadeIn 1s ease forwards 2.4s;
     }
@@ -319,16 +309,6 @@
       from { opacity: 0; }
       to   { opacity: 1; }
     }
-    @keyframes badgeFloat1 {
-      0%   { transform: rotate(-7deg) translateY(0); }
-      40%  { transform: rotate(-5deg) translateY(-8px) scale(1.04); }
-      100% { transform: rotate(-7deg) translateY(0); }
-    }
-    @keyframes badgeFloat2 {
-      0%   { transform: rotate(5deg) translateY(0); }
-      45%  { transform: rotate(3deg) translateY(-9px); }
-      100% { transform: rotate(5deg) translateY(0); }
-    }
     @keyframes badgeFloat3 {
       0%   { transform: rotate(3deg) translateX(0); }
       40%  { transform: rotate(5deg) translateX(6px) scale(1.04); }
@@ -373,21 +353,27 @@
         font-size: clamp(10px, 3vw, 14px);
       }
 
-      /* Info bar — 2-column layout, hide center pills */
-      .info-bar {
-        grid-template-columns: 1fr 1fr;
-        padding: 16px 14px;
+      /* Top bar — narrower padding on mobile */
+      .top-bar {
+        padding-left: clamp(100px, 25vw, 140px);
+        padding-top: clamp(12px, 2vw, 20px);
+        padding-right: 14px;
+        padding-bottom: 0;
       }
-      .info-menu { display: none; }
-      .info-address .value,
-      .info-ig .value { font-size: 11px; }
+      .top-bar .info-address .value,
+      .top-bar .info-ig .value { font-size: 11px; }
+      .top-bar .info-ig { align-items: flex-end; }
+
+      /* Info bar — center only */
+      .info-bar { padding: 16px 14px; }
+      .info-menu { display: flex; }
     }
 
     @media (max-width: 400px) {
       /* Extra narrow phones */
       .side-word { display: none; }
-      .badge-1 { font-size: 12px; padding: 9px 16px; }
-      .badge-2 { font-size: 11px; padding: 8px 14px; right: 10px; }
+      .top-bar { padding-left: 90px; }
+      .top-bar .label { display: none; }
     }
   </style>
 </head>
@@ -415,9 +401,32 @@
     <div class="side-word side-left">US<span>KO</span>RO</div>
     <div class="side-word side-right">OT<span>VO</span>RENI</div>
 
+    <!-- Top bar: address + instagram -->
+    <div class="top-bar">
+      <a href="https://maps.google.com/?q=Križanićeva+1A,+Beograd,+Srbija"
+         target="_blank" rel="noopener" class="info-address">
+        <span class="label">Adresa</span>
+        <span class="value">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.5"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          Križanićeva 1A, Beograd
+        </span>
+      </a>
+      <a href="https://www.instagram.com/hifoodbg?igsh=MWx3NXBlM2QwZjBmbw%3D%3D&utm_source=qr"
+         target="_blank" rel="noopener" class="info-ig">
+        <span class="label">Pratite nas</span>
+        <span class="value">
+          <img src="Instagram_logo_2022.svg" alt="Instagram" width="18" height="18">
+          Hi FOOD
+        </span>
+      </a>
+    </div>
+
     <!-- Floating sticker badges -->
-    <div class="badge badge-1">Grand Open</div>
-    <div class="badge badge-2">Beograd<br>2026</div>
     <div class="badge badge-3">Kavkaski ukusi</div>
     <div class="badge badge-4">Šašlik<span class="dot"></span>Šavarma<span class="dot"></span>Napitci</div>
 
@@ -448,25 +457,8 @@
       </div>
     </div>
 
-    <!-- Bottom info bar -->
+    <!-- Bottom info bar — menu pills only -->
     <div class="info-bar">
-
-      <!-- Address -->
-      <a href="https://maps.google.com/?q=Križanićeva+1A,+Beograd,+Srbija"
-         target="_blank" rel="noopener" class="info-address">
-        <span class="label">Adresa</span>
-        <span class="value">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="2.5"
-               stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-            <circle cx="12" cy="10" r="3"/>
-          </svg>
-          Križanićeva 1A, Beograd
-        </span>
-      </a>
-
-      <!-- Menu pills -->
       <div class="info-menu">
         <span class="menu-label">Na meniju</span>
         <div class="menu-pills">
@@ -475,17 +467,6 @@
           <span class="pill">Napitci</span>
         </div>
       </div>
-
-      <!-- Instagram -->
-      <a href="https://www.instagram.com/hifoodbg?igsh=MWx3NXBlM2QwZjBmbw%3D%3D&utm_source=qr"
-         target="_blank" rel="noopener" class="info-ig">
-        <span class="label">Pratite nas</span>
-        <span class="value">
-          <img src="Instagram_logo_2022.svg" alt="Instagram" width="18" height="18">
-          Hi FOOD
-        </span>
-      </a>
-
     </div>
 
   </section>
