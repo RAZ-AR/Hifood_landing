@@ -342,9 +342,52 @@
 
     /* ── Responsive ── */
     @media (max-width: 640px) {
-      .info-bar { grid-template-columns: 1fr 1fr; }
+      /* Touch screens don't have a mouse cursor */
+      .cursor, .cursor-ring { display: none; }
+      body { cursor: auto; }
+      .wolt-btn, .menu-btn { cursor: pointer; }
+
+      /* Side vertical words — smaller so they don't crowd center content */
+      .side-word { font-size: clamp(32px, 8vw, 44px); }
+      .side-left  { left: 3px; }
+      .side-right { right: 3px; }
+
+      /* Tagline — legible on small screens */
+      .tagline { font-size: clamp(9px, 2.8vw, 12px); }
+
+      /* CTA buttons — full-width stack on very narrow screens */
+      .cta-group { gap: 8px; }
+      .wolt-btn, .menu-btn {
+        font-size: clamp(12px, 3.5vw, 15px);
+        padding: 11px 20px;
+      }
+
+      /* Badges: separate vertically so they don't overlap */
+      .badge-3 {
+        bottom: clamp(180px, 28vh, 260px);
+        left: clamp(12px, 3vw, 30px);
+      }
+      .badge-4 {
+        bottom: clamp(100px, 18vh, 160px);
+        right: clamp(12px, 3vw, 30px);
+        font-size: clamp(10px, 3vw, 14px);
+      }
+
+      /* Info bar — 2-column layout, hide center pills */
+      .info-bar {
+        grid-template-columns: 1fr 1fr;
+        padding: 16px 14px;
+      }
       .info-menu { display: none; }
-      .side-word { font-size: clamp(40px, 10vw, 70px); }
+      .info-address .value,
+      .info-ig .value { font-size: 11px; }
+    }
+
+    @media (max-width: 400px) {
+      /* Extra narrow phones */
+      .side-word { display: none; }
+      .badge-1 { font-size: 12px; padding: 9px 16px; }
+      .badge-2 { font-size: 11px; padding: 8px 14px; right: 10px; }
     }
   </style>
 </head>
