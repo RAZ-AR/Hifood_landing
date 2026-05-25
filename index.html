@@ -183,6 +183,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: clamp(12px, 2vw, 28px);
       opacity: 0;
       animation: fadeIn 1s ease forwards 1.3s;
     }
@@ -253,6 +254,45 @@
     .info-address .value svg { opacity: 0.6; flex-shrink: 0; transition: opacity 0.25s; }
     .info-address:hover .value { color: var(--cyan); }
     .info-address:hover .value svg { opacity: 1; }
+
+    /* Contact links */
+    .contact-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex: 1;
+    }
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 34px;
+      padding: 8px 12px;
+      border: 1px solid rgba(245,245,240,0.18);
+      border-radius: 999px;
+      color: rgba(245,245,240,0.82);
+      background: rgba(8,8,8,0.2);
+      text-decoration: none;
+      font-size: clamp(10px, 1vw, 13px);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.2s;
+      cursor: none;
+    }
+    .contact-link svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+    .contact-link:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      background: rgba(0,179,235,0.1);
+      transform: translateY(-1px);
+    }
 
     /* Menu pills — center */
     .info-menu {
@@ -325,7 +365,7 @@
       /* Touch screens don't have a mouse cursor */
       .cursor, .cursor-ring { display: none; }
       body { cursor: auto; }
-      .wolt-btn, .menu-btn { cursor: pointer; }
+      .wolt-btn, .menu-btn, .contact-link { cursor: pointer; }
 
       /* Side vertical words — smaller so they don't crowd center content */
       .side-word { font-size: clamp(32px, 8vw, 44px); }
@@ -359,10 +399,27 @@
         padding-top: clamp(12px, 2vw, 20px);
         padding-right: 14px;
         padding-bottom: 0;
+        align-items: flex-start;
+        gap: 10px;
       }
       .top-bar .info-address .value,
       .top-bar .info-ig .value { font-size: 11px; }
       .top-bar .info-ig { align-items: flex-end; }
+      .top-bar .info-address { display: none; }
+      .contact-links {
+        justify-content: flex-end;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .contact-link {
+        min-height: 32px;
+        padding: 8px;
+        font-size: 0;
+      }
+      .contact-link.phone-link {
+        font-size: 11px;
+        padding: 8px 10px;
+      }
 
       /* Info bar — center only */
       .info-bar { padding: 16px 14px; }
@@ -374,6 +431,8 @@
       .side-word { display: none; }
       .top-bar { padding-left: 90px; }
       .top-bar .label { display: none; }
+      .top-bar .info-ig { display: none; }
+      .contact-links { width: 100%; }
     }
   </style>
 </head>
@@ -416,6 +475,27 @@
           Križanićeva 1A, Beograd
         </span>
       </a>
+      <div class="contact-links" aria-label="Kontakt">
+        <a href="tel:+381606681992" class="contact-link phone-link" aria-label="Pozovite Hi Food">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.35 1.9.66 2.81a2 2 0 0 1-.45 2.11L8.05 9.91a16 16 0 0 0 6.04 6.04l1.27-1.27a2 2 0 0 1 2.11-.45c.91.31 1.85.53 2.81.66A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          +381 60 668 1992
+        </a>
+        <a href="https://t.me/HiFood1" target="_blank" rel="noopener" class="contact-link" aria-label="Telegram Hi Food">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M21.8 4.6 18.6 19.7c-.24 1.08-.87 1.34-1.76.84l-4.86-3.58-2.35 2.26c-.26.26-.48.48-.98.48l.35-4.95 9.02-8.15c.39-.35-.09-.55-.61-.2L6.26 13.39 1.46 11.9c-1.04-.33-1.06-1.04.22-1.54L20.43 3.14c.87-.32 1.63.2 1.37 1.46z"/>
+          </svg>
+          Telegram
+        </a>
+        <a href="https://wa.me/381606681992" target="_blank" rel="noopener" class="contact-link" aria-label="WhatsApp Hi Food">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12.04 2a9.92 9.92 0 0 0-8.55 14.95L2.2 21.8l4.97-1.3A9.93 9.93 0 1 0 12.04 2zm0 18.18a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-2.95.78.79-2.88-.2-.31a8.2 8.2 0 1 1 6.84 3.74zm4.5-6.15c-.25-.12-1.46-.72-1.68-.8-.23-.08-.39-.12-.56.12-.16.25-.64.8-.78.97-.14.16-.29.18-.53.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.22-1.45-1.37-1.7-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.41-.56-.42h-.47c-.16 0-.43.06-.65.31-.23.25-.86.84-.86 2.05 0 1.2.88 2.37 1 2.53.12.17 1.73 2.64 4.19 3.7.59.25 1.04.4 1.4.52.59.19 1.12.16 1.54.1.47-.07 1.46-.6 1.66-1.17.21-.58.21-1.07.15-1.17-.06-.11-.23-.17-.47-.29z"/>
+          </svg>
+          WhatsApp
+        </a>
+      </div>
       <a href="https://www.instagram.com/hifoodbg?igsh=MWx3NXBlM2QwZjBmbw%3D%3D&utm_source=qr"
          target="_blank" rel="noopener" class="info-ig">
         <span class="label">Pratite nas</span>
