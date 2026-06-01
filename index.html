@@ -138,41 +138,126 @@
     }
 
     /* ── CTA buttons ── */
+    :root {
+      --glass-fill: linear-gradient(135deg, rgba(255,255,255,0.34), rgba(255,255,255,0.12) 48%, rgba(255,255,255,0.24));
+      --glass-edge: rgba(255,255,255,0.42);
+      --glass-edge-hot: rgba(255,255,255,0.72);
+      --glass-shadow:
+        0 18px 42px rgba(0,0,0,0.32),
+        0 4px 14px rgba(0,179,235,0.14),
+        inset 0 1px 0 rgba(255,255,255,0.76),
+        inset 0 -1px 0 rgba(255,255,255,0.16);
+      --glass-shadow-hover:
+        0 24px 56px rgba(0,0,0,0.36),
+        0 8px 24px rgba(0,179,235,0.22),
+        inset 0 1px 0 rgba(255,255,255,0.88),
+        inset 0 -1px 0 rgba(255,255,255,0.2);
+    }
     .cta-group {
       display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center;
       margin-top: clamp(18px, 2.8vh, 32px);
     }
-    .wolt-btn {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: #fff;
-      color: var(--black);
-      text-decoration: none;
-      border-radius: 999px;
-      padding: clamp(10px, 1.2vh, 14px) clamp(18px, 2.2vw, 30px);
-      font-size: clamp(11px, 1.1vw, 14px);
-      font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase;
-      transition: filter 0.2s, transform 0.2s;
-      cursor: none;
+    .wolt-btn,
+    .menu-btn,
+    .contact-link {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      background: var(--glass-fill);
+      border: 1px solid var(--glass-edge);
+      box-shadow: var(--glass-shadow);
+      -webkit-backdrop-filter: blur(22px) saturate(1.85);
+      backdrop-filter: blur(22px) saturate(1.85);
     }
-    .wolt-btn:hover { filter: brightness(0.92); transform: scale(1.05); }
-    .wolt-btn img { height: clamp(16px, 1.8vw, 22px); width: auto; display: block; filter: brightness(0); }
-
-    .menu-btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: transparent;
+    .wolt-btn::before,
+    .menu-btn::before,
+    .contact-link::before {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      z-index: -1;
+      border-radius: inherit;
+      background:
+        linear-gradient(120deg, rgba(255,255,255,0.64), transparent 34%),
+        radial-gradient(circle at 18% 8%, rgba(255,255,255,0.82), transparent 28%),
+        radial-gradient(circle at 86% 92%, rgba(0,179,235,0.28), transparent 34%);
+      opacity: 0.64;
+      pointer-events: none;
+    }
+    .wolt-btn::after,
+    .menu-btn::after,
+    .contact-link::after {
+      content: "";
+      position: absolute;
+      top: -80%;
+      left: -45%;
+      width: 44%;
+      height: 260%;
+      z-index: -1;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.68), transparent);
+      opacity: 0;
+      transform: rotate(22deg) translateX(-40%);
+      transition: opacity 0.25s, transform 0.45s;
+      pointer-events: none;
+    }
+    .wolt-btn {
+      gap: 10px;
       color: var(--white);
       text-decoration: none;
       border-radius: 999px;
-      border: 1.5px solid rgba(245,245,240,0.35);
       padding: clamp(10px, 1.2vh, 14px) clamp(18px, 2.2vw, 30px);
       font-size: clamp(11px, 1.1vw, 14px);
       font-weight: 700; letter-spacing: 0.1em;
       text-transform: uppercase;
-      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+      text-shadow: 0 1px 12px rgba(0,0,0,0.34);
+      transition: border-color 0.22s, box-shadow 0.22s, color 0.22s, transform 0.22s;
       cursor: none;
     }
-    .menu-btn:hover { border-color: var(--cyan); color: var(--cyan); transform: scale(1.05); }
+    .wolt-btn:hover {
+      border-color: var(--glass-edge-hot);
+      box-shadow: var(--glass-shadow-hover);
+      color: #fff;
+      transform: translateY(-2px) scale(1.04);
+    }
+    .wolt-btn:hover::after { opacity: 1; transform: rotate(22deg) translateX(360%); }
+    .wolt-btn img {
+      height: clamp(16px, 1.8vw, 22px);
+      width: auto;
+      display: block;
+      filter: brightness(0) invert(1) drop-shadow(0 1px 8px rgba(0,0,0,0.24));
+    }
+
+    .menu-btn {
+      gap: 8px;
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 999px;
+      padding: clamp(10px, 1.2vh, 14px) clamp(18px, 2.2vw, 30px);
+      font-size: clamp(11px, 1.1vw, 14px);
+      font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-shadow: 0 1px 12px rgba(0,0,0,0.34);
+      transition: border-color 0.22s, box-shadow 0.22s, color 0.22s, transform 0.22s;
+      cursor: none;
+    }
+    .menu-btn:hover {
+      border-color: var(--glass-edge-hot);
+      box-shadow: var(--glass-shadow-hover);
+      color: #fff;
+      transform: translateY(-2px) scale(1.04);
+    }
+    .menu-btn:hover::after { opacity: 1; transform: rotate(22deg) translateX(360%); }
+    .social-links {
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center;
+      margin-top: clamp(12px, 1.8vh, 18px);
+    }
+    .social-link img {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
 
     /* ── Top info bar (address + instagram) ── */
     .top-bar {
@@ -264,35 +349,34 @@
       flex: 1;
     }
     .contact-link {
-      display: inline-flex;
-      align-items: center;
       gap: 7px;
       min-height: 34px;
       padding: 8px 12px;
-      border: 1px solid rgba(245,245,240,0.18);
       border-radius: 999px;
       color: rgba(245,245,240,0.82);
-      background: rgba(8,8,8,0.2);
       text-decoration: none;
       font-size: clamp(10px, 1vw, 13px);
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       white-space: nowrap;
-      transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.2s;
+      text-shadow: 0 1px 10px rgba(0,0,0,0.3);
+      transition: border-color 0.22s, box-shadow 0.22s, color 0.22s, transform 0.22s;
       cursor: none;
     }
     .contact-link svg {
       width: 16px;
       height: 16px;
       flex-shrink: 0;
+      filter: drop-shadow(0 1px 8px rgba(0,0,0,0.2));
     }
     .contact-link:hover {
-      border-color: var(--cyan);
-      color: var(--cyan);
-      background: rgba(0,179,235,0.1);
-      transform: translateY(-1px);
+      border-color: var(--glass-edge-hot);
+      color: #fff;
+      box-shadow: var(--glass-shadow-hover);
+      transform: translateY(-2px);
     }
+    .contact-link:hover::after { opacity: 1; transform: rotate(22deg) translateX(360%); }
 
     /* Menu pills — center */
     .info-menu {
@@ -496,14 +580,6 @@
           WhatsApp
         </a>
       </div>
-      <a href="https://www.instagram.com/hi_food_serbia"
-         target="_blank" rel="noopener" class="info-ig">
-        <span class="label">Pratite nas</span>
-        <span class="value">
-          <img src="Instagram_logo_2022.svg" alt="Instagram" width="18" height="18">
-          Hi FOOD
-        </span>
-      </a>
     </div>
 
     <!-- Floating sticker badges -->
@@ -533,6 +609,18 @@
             <line x1="3" y1="18" x2="3.01" y2="18"/>
           </svg>
           Naš Meni
+        </a>
+      </div>
+      <div class="social-links" aria-label="Hi Food društvene mreže">
+        <a href="https://www.instagram.com/hi_food_serbia"
+           target="_blank" rel="noopener" class="menu-btn social-link" aria-label="Instagram Hi Food">
+          <img src="Instagram_logo_2022.svg" alt="Instagram" width="18" height="18">
+          Instagram
+        </a>
+        <a href="https://www.tiktok.com/@hifood.belgrade?_r=1&_t=ZS-96qQKl2gURL"
+           target="_blank" rel="noopener" class="menu-btn social-link" aria-label="TikTok Hi Food">
+          <img src="tiktok.svg" alt="TikTok" width="18" height="18">
+          TikTok
         </a>
       </div>
     </div>
