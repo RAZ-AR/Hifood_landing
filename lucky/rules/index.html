@@ -14,13 +14,16 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{font-family:'Archivo','Helvetica Neue',Arial,sans-serif;background:#fff;color:#0B0B0B;-webkit-font-smoothing:antialiased;}
+body{font-family:'Archivo','Helvetica Neue',Arial,sans-serif;background:transparent;color:#0B0B0B;-webkit-font-smoothing:antialiased;}
+#parallax-bg{position:fixed;left:0;right:0;top:-18%;height:136%;background:url('../uploads/background.jpg') center center/cover no-repeat;z-index:0;pointer-events:none;will-change:transform;}
+.site-shell{position:relative;z-index:1;}
 ::selection{background:#C7F500;color:#0B0B0B;}
 @keyframes rise{from{opacity:0;transform:translateY(46px);}to{opacity:1;transform:translateY(0);}}
 </style>
 </helmet>
 
-<div style="overflow:clip;">
+<div id="parallax-bg" aria-hidden="true"></div>
+<div class="site-shell" style="overflow:clip;">
 
 <!-- ============ TOP BAR ============ -->
 <div style="position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:12px;background:#0B0B0B;color:#fff;padding:11px clamp(16px,4vw,48px);">
@@ -153,6 +156,15 @@ class Component extends DCLogic {
     try{ const s=localStorage.getItem('hf_lang'); if(s&&DICT[s]) lang=s; }catch(e){}
     this.state={ lang };
   }
+  componentDidMount(){
+    this._parallax=()=>{
+      const bg=document.getElementById('parallax-bg');
+      if(bg) bg.style.transform='translate3d(0,'+(window.scrollY*0.35)+'px,0)';
+    };
+    window.addEventListener('scroll',this._parallax,{passive:true});
+    this._parallax();
+  }
+  componentWillUnmount(){ window.removeEventListener('scroll',this._parallax); }
   setLang(l){ try{localStorage.setItem('hf_lang',l);}catch(e){} this.setState({lang:l}); }
   renderVals(){
     const T=DICT[this.state.lang]||DICT.ru;
