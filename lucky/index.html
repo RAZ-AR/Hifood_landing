@@ -41,7 +41,7 @@ input::placeholder{color:#0B0B0B;opacity:.35;}
       <button onClick="{{ langEn }}" style="{{ tabEn }}">EN</button>
       <button onClick="{{ langSr }}" style="{{ tabSr }}">SR</button>
     </div>
-    <a href="https://hifood.space" style="display:flex;align-items:center;gap:6px;text-decoration:none;color:#fff;font-weight:700;font-size:13px;letter-spacing:.02em;border:1.5px solid rgba(255,255,255,.28);padding:7px 13px;border-radius:999px;" style-hover="background:#fff;color:#0B0B0B;border-color:#fff;">{{ t.nav_main }}<span style="font-size:15px;">↗</span></a>
+    <a href="https://hifood.space" style="display:flex;align-items:center;gap:6px;text-decoration:none;color:#fff;font-weight:700;font-size:13px;letter-spacing:.02em;border:1.5px solid rgba(255,255,255,.28);padding:7px 13px;border-radius:999px;" style-hover="background:transparent;color:#0B0B0B;border-color:#fff;">{{ t.nav_main }}<span style="font-size:15px;">↗</span></a>
   </div>
 </div>
 
@@ -114,7 +114,7 @@ input::placeholder{color:#0B0B0B;opacity:.35;}
 </section>
 
 <!-- ============ PRIZES ============ -->
-<section data-screen-label="Prizes" data-speaker-notes="Призы месяца — карточки с едой и сертификатами." style="background:#EEEDE8;padding:clamp(48px,6vw,96px) clamp(16px,4vw,48px);">
+<section data-screen-label="Prizes" data-speaker-notes="Призы месяца — карточки с едой и сертификатами." style="background:transparent;padding:clamp(48px,6vw,96px) clamp(16px,4vw,48px);">
   <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:clamp(28px,4vw,48px);">
     <div>
       <div style="font-weight:800;font-size:clamp(12px,1.3vw,15px);letter-spacing:.18em;text-transform:uppercase;color:#FF3B00;margin-bottom:10px;">{{ t.prizes_kicker }}</div>
@@ -162,13 +162,13 @@ input::placeholder{color:#0B0B0B;opacity:.35;}
     <div style="border-top:3px solid #fff;padding-top:16px;"><div style="font-size:clamp(40px,5vw,72px);font-weight:900;line-height:.9;letter-spacing:-.03em;color:#C7F500;">05</div><p style="font-size:clamp(15px,1.5vw,19px);font-weight:600;line-height:1.2;margin-top:12px;">{{ t.step5 }}</p></div>
   </div>
   <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:clamp(36px,4vw,56px);">
-    <span style="background:#fff;color:#0B0B0B;font-weight:800;font-size:clamp(13px,1.4vw,17px);padding:11px 18px;border-radius:999px;text-transform:uppercase;letter-spacing:.02em;">{{ t.scheme1 }}</span>
+    <span style="background:transparent;color:#0B0B0B;font-weight:800;font-size:clamp(13px,1.4vw,17px);padding:11px 18px;border-radius:999px;text-transform:uppercase;letter-spacing:.02em;">{{ t.scheme1 }}</span>
     <span style="color:#C7F500;font-size:22px;font-weight:900;">→</span>
-    <span style="background:#fff;color:#0B0B0B;font-weight:800;font-size:clamp(13px,1.4vw,17px);padding:11px 18px;border-radius:999px;text-transform:uppercase;letter-spacing:.02em;">{{ t.scheme2 }}</span>
+    <span style="background:transparent;color:#0B0B0B;font-weight:800;font-size:clamp(13px,1.4vw,17px);padding:11px 18px;border-radius:999px;text-transform:uppercase;letter-spacing:.02em;">{{ t.scheme2 }}</span>
     <span style="color:#C7F500;font-size:22px;font-weight:900;">→</span>
-    <span style="background:#fff;color:#0B0B0B;font-weight:800;font-size:clamp(13px,1.4vw,17px);padding:11px 18px;border-radius:999px;text-transform:uppercase;letter-spacing:.02em;">{{ t.scheme3 }}</span>
+    <span style="background:transparent;color:#0B0B0B;font-weight:800;font-size:clamp(13px,1.4vw,17px);padding:11px 18px;border-radius:999px;text-transform:uppercase;letter-spacing:.02em;">{{ t.scheme3 }}</span>
     <span style="color:#C7F500;font-size:22px;font-weight:900;">→</span>
-    <span style="background:#fff;color:#0B0B0B;font-weight:800;font-size:clamp(13px,1.4vw,17px);padding:11px 18px;border-radius:999px;text-transform:uppercase;letter-spacing:.02em;">{{ t.scheme4 }}</span>
+    <span style="background:transparent;color:#0B0B0B;font-weight:800;font-size:clamp(13px,1.4vw,17px);padding:11px 18px;border-radius:999px;text-transform:uppercase;letter-spacing:.02em;">{{ t.scheme4 }}</span>
     <span style="color:#C7F500;font-size:22px;font-weight:900;">→</span>
     <span style="background:#C7F500;color:#0B0B0B;font-weight:900;font-size:clamp(13px,1.4vw,17px);padding:11px 18px;border-radius:999px;text-transform:uppercase;letter-spacing:.02em;">{{ t.scheme5 }} 🏆</span>
   </div>
@@ -180,7 +180,7 @@ input::placeholder{color:#0B0B0B;opacity:.35;}
   <h2 style="font-size:clamp(40px,7vw,110px);font-weight:900;line-height:.85;letter-spacing:-.035em;text-transform:uppercase;">{{ t.check_title }}</h2>
   <p style="font-size:clamp(16px,1.8vw,22px);font-weight:600;max-width:34ch;line-height:1.25;margin-top:18px;">{{ t.check_desc }}</p>
   <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(24px,3vw,36px);max-width:640px;">
-    <input value="{{ ticket }}" onChange="{{ onTicket }}" onKeyDown="{{ onTicketKey }}" placeholder="HF-001842" style="flex:1;min-width:220px;background:#fff;border:3px solid #0B0B0B;border-radius:4px;padding:16px 20px;font-family:inherit;font-weight:800;font-size:clamp(18px,2.2vw,26px);letter-spacing:.04em;color:#0B0B0B;outline:none;text-transform:uppercase;" />
+    <input value="{{ ticket }}" onChange="{{ onTicket }}" onKeyDown="{{ onTicketKey }}" placeholder="HF-001842" style="flex:1;min-width:220px;background:transparent;border:3px solid #0B0B0B;border-radius:4px;padding:16px 20px;font-family:inherit;font-weight:800;font-size:clamp(18px,2.2vw,26px);letter-spacing:.04em;color:#0B0B0B;outline:none;text-transform:uppercase;" />
     <button onClick="{{ checkTicket }}" style="background:#0B0B0B;color:#fff;border:none;border-radius:4px;padding:16px 30px;font-family:inherit;font-weight:800;font-size:clamp(16px,1.8vw,20px);cursor:pointer;letter-spacing:.01em;transition:transform .18s;" style-hover="transform:translateY(-3px);">{{ t.check_btn }}</button>
   </div>
   <div style="font-size:13px;font-weight:600;opacity:.55;margin-top:10px;">{{ t.check_hint }}</div>
@@ -223,17 +223,17 @@ input::placeholder{color:#0B0B0B;opacity:.35;}
     <div style="background:#0B0B0B;color:#fff;font-weight:800;font-size:clamp(15px,1.7vw,20px);padding:12px 20px;border-radius:999px;">{{ t.winners_month }}</div>
   </div>
   <div style="display:flex;flex-direction:column;gap:clamp(10px,1.4vw,16px);animation:rise linear both;animation-timeline:view();animation-range:entry 0% cover 22%;">
-    <div style="background:#fff;color:#0B0B0B;border-radius:4px;padding:clamp(20px,2.6vw,30px);display:flex;align-items:center;gap:clamp(16px,2.5vw,32px);">
+    <div style="background:transparent;color:#0B0B0B;border-radius:4px;padding:clamp(20px,2.6vw,30px);display:flex;align-items:center;gap:clamp(16px,2.5vw,32px);">
       <span style="font-size:clamp(34px,5vw,64px);flex:none;">🥇</span>
       <div style="font-size:clamp(28px,5vw,64px);font-weight:900;letter-spacing:-.02em;line-height:.9;text-transform:uppercase;">{{ t.winners_placeholder }}</div>
       <div style="margin-left:auto;text-align:right;font-weight:800;font-size:clamp(13px,1.5vw,18px);text-transform:uppercase;letter-spacing:.04em;">{{ t.winners_grand }}<br><span style="opacity:.5;">5 000 RSD</span></div>
     </div>
-    <div style="background:#fff;color:#0B0B0B;border-radius:4px;padding:clamp(20px,2.6vw,30px);display:flex;align-items:center;gap:clamp(16px,2.5vw,32px);">
+    <div style="background:transparent;color:#0B0B0B;border-radius:4px;padding:clamp(20px,2.6vw,30px);display:flex;align-items:center;gap:clamp(16px,2.5vw,32px);">
       <span style="font-size:clamp(34px,5vw,64px);flex:none;">🥈</span>
       <div style="font-size:clamp(28px,5vw,64px);font-weight:900;letter-spacing:-.02em;line-height:.9;text-transform:uppercase;">{{ t.winners_placeholder }}</div>
       <div style="margin-left:auto;text-align:right;font-weight:800;font-size:clamp(13px,1.5vw,18px);text-transform:uppercase;letter-spacing:.04em;">{{ t.winners_second }}<br><span style="opacity:.5;">1 000 RSD</span></div>
     </div>
-    <div style="background:#fff;color:#0B0B0B;border-radius:4px;padding:clamp(20px,2.6vw,30px);display:flex;align-items:center;gap:clamp(16px,2.5vw,32px);">
+    <div style="background:transparent;color:#0B0B0B;border-radius:4px;padding:clamp(20px,2.6vw,30px);display:flex;align-items:center;gap:clamp(16px,2.5vw,32px);">
       <span style="font-size:clamp(34px,5vw,64px);flex:none;">🥈</span>
       <div style="font-size:clamp(28px,5vw,64px);font-weight:900;letter-spacing:-.02em;line-height:.9;text-transform:uppercase;">{{ t.winners_placeholder }}</div>
       <div style="margin-left:auto;text-align:right;font-weight:800;font-size:clamp(13px,1.5vw,18px);text-transform:uppercase;letter-spacing:.04em;">{{ t.winners_second }}<br><span style="opacity:.5;">1 000 RSD</span></div>
@@ -242,7 +242,7 @@ input::placeholder{color:#0B0B0B;opacity:.35;}
 </section>
 
 <!-- ============ RULES ============ -->
-<section data-screen-label="Rules" data-speaker-notes="Краткие правила + ссылка на полные." style="background:#fff;color:#0B0B0B;padding:clamp(48px,6vw,96px) clamp(16px,4vw,48px);">
+<section data-screen-label="Rules" data-speaker-notes="Краткие правила + ссылка на полные." style="background:transparent;color:#0B0B0B;padding:clamp(48px,6vw,96px) clamp(16px,4vw,48px);">
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(28px,4vw,56px);align-items:start;">
     <div>
       <div style="font-weight:800;font-size:clamp(12px,1.3vw,15px);letter-spacing:.18em;text-transform:uppercase;color:#1A6BFF;margin-bottom:10px;">{{ t.rules_kicker }}</div>
@@ -266,7 +266,7 @@ input::placeholder{color:#0B0B0B;opacity:.35;}
     <div style="border-top:2px solid rgba(255,255,255,.2);padding-top:14px;font-weight:700;font-size:clamp(15px,1.6vw,19px);">{{ t.insta3 }}</div>
     <div style="border-top:2px solid rgba(255,255,255,.2);padding-top:14px;font-weight:700;font-size:clamp(15px,1.6vw,19px);">{{ t.insta4 }}</div>
   </div>
-  <a href="https://instagram.com/hi_food_serbia" target="_blank" style="display:inline-flex;align-items:center;gap:10px;margin-top:clamp(28px,4vw,44px);background:#fff;color:#0B0B0B;text-decoration:none;font-weight:900;font-size:clamp(16px,2vw,22px);padding:18px 32px;border-radius:999px;letter-spacing:-.01em;transition:transform .18s;" style-hover="transform:translateY(-3px);">{{ t.insta_btn }} @hi_food_serbia <span style="font-size:20px;">↗</span></a>
+  <a href="https://instagram.com/hi_food_serbia" target="_blank" style="display:inline-flex;align-items:center;gap:10px;margin-top:clamp(28px,4vw,44px);background:transparent;color:#0B0B0B;text-decoration:none;font-weight:900;font-size:clamp(16px,2vw,22px);padding:18px 32px;border-radius:999px;letter-spacing:-.01em;transition:transform .18s;" style-hover="transform:translateY(-3px);">{{ t.insta_btn }} @hi_food_serbia <span style="font-size:20px;">↗</span></a>
 </section>
 
 <!-- ============ FOOTER ============ -->

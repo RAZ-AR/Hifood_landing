@@ -36,7 +36,7 @@ body{font-family:'Archivo','Helvetica Neue',Arial,sans-serif;background:transpar
       <button onClick="{{ langEn }}" style="{{ tabEn }}">EN</button>
       <button onClick="{{ langSr }}" style="{{ tabSr }}">SR</button>
     </div>
-    <a href="../" style="display:flex;align-items:center;gap:6px;text-decoration:none;color:#fff;font-weight:700;font-size:13px;letter-spacing:.02em;border:1.5px solid rgba(255,255,255,.28);padding:7px 13px;border-radius:999px;" style-hover="background:#fff;color:#0B0B0B;border-color:#fff;">{{ t.nav_lucky }}<span style="font-size:15px;">←</span></a>
+    <a href="../" style="display:flex;align-items:center;gap:6px;text-decoration:none;color:#fff;font-weight:700;font-size:13px;letter-spacing:.02em;border:1.5px solid rgba(255,255,255,.28);padding:7px 13px;border-radius:999px;" style-hover="background:transparent;color:#0B0B0B;border-color:#fff;">{{ t.nav_lucky }}<span style="font-size:15px;">←</span></a>
   </div>
 </div>
 
@@ -50,7 +50,7 @@ body{font-family:'Archivo','Helvetica Neue',Arial,sans-serif;background:transpar
 </section>
 
 <!-- ============ RULES LIST ============ -->
-<section style="background:#fff;color:#0B0B0B;padding:clamp(48px,6vw,96px) clamp(16px,4vw,48px);">
+<section style="background:transparent;color:#0B0B0B;padding:clamp(48px,6vw,96px) clamp(16px,4vw,48px);">
   <div style="max-width:820px;margin:0 auto;animation:rise linear both;animation-timeline:view();animation-range:entry 0% cover 18%;">
     <sc-for list="{{ rules }}" as="rule">
       <div style="display:flex;gap:clamp(14px,2vw,22px);align-items:flex-start;border-top:2px solid rgba(11,11,11,.1);padding:clamp(18px,2.5vw,28px) 0;">
