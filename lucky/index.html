@@ -137,18 +137,10 @@ input::placeholder{color:#0B0B0B;opacity:.35;}
       </div>
       <!-- shawarma -->
       <div style="background:#14E06A;color:#0B0B0B;border-radius:4px;display:flex;flex-direction:column;min-height:clamp(300px,30vw,400px);overflow:hidden;">
-        <image-slot id="prize-shawarma" shape="rect" placeholder="{{ t.drop }}" style="width:100%;flex:1;min-height:160px;background:rgba(0,0,0,.06);"></image-slot>
+        <image-slot id="prize-shawarma" src="./uploads/shawarma.jpg" shape="rect" fit="cover" placeholder="{{ t.drop }}" style="width:100%;flex:1;min-height:160px;background:rgba(0,0,0,.06);"></image-slot>
         <div style="padding:clamp(18px,2vw,24px);display:flex;align-items:flex-end;justify-content:space-between;gap:12px;">
           <div><div style="font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.6;">{{ t.prize3_tag }}</div><div style="font-size:clamp(20px,2.3vw,28px);font-weight:900;line-height:1.0;letter-spacing:-.02em;margin-top:4px;">{{ t.prize3 }}</div></div>
-          <div style="font-size:clamp(28px,4vw,48px);font-weight:900;line-height:.8;letter-spacing:-.03em;flex:none;">×10</div>
-        </div>
-      </div>
-      <!-- shashlik -->
-      <div style="background:#C7F500;color:#0B0B0B;border-radius:4px;display:flex;flex-direction:column;min-height:clamp(300px,30vw,400px);overflow:hidden;">
-        <image-slot id="prize-shashlik" shape="rect" placeholder="{{ t.drop }}" style="width:100%;flex:1;min-height:160px;background:rgba(0,0,0,.06);"></image-slot>
-        <div style="padding:clamp(18px,2vw,24px);display:flex;align-items:flex-end;justify-content:space-between;gap:12px;">
-          <div><div style="font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.6;">{{ t.prize4_tag }}</div><div style="font-size:clamp(20px,2.3vw,28px);font-weight:900;line-height:1.0;letter-spacing:-.02em;margin-top:4px;">{{ t.prize4 }}</div></div>
-          <div style="font-size:clamp(28px,4vw,48px);font-weight:900;line-height:.8;letter-spacing:-.03em;flex:none;">×5</div>
+          <div style="font-size:clamp(28px,4vw,48px);font-weight:900;line-height:.8;letter-spacing:-.03em;flex:none;">× 5</div>
         </div>
       </div>
     </div>
@@ -307,8 +299,7 @@ const DICT = {
 
     prizes_kicker:"Призы", prizes_title:"Призы месяца",
     prize_grand_tag:"Главный приз", prize_grand_desc:"Сертификат Hi Food",
-    prize2_tag:"3 сертификата", prize3_tag:"Шаурма", prize3:"бесплатных шаурм",
-    prize4_tag:"Шашлык", prize4:"бесплатных шашлыков", drop:"Перетащи фото еды",
+    prize2_tag:"3 сертификата", prize3_tag:"Шаурма", prize3:"бесплатных шаурм", drop:"Перетащи фото еды",
     how_kicker:"Инструкция", how_title:"Как участвовать",
     step1:"Сделайте заказ", step2:"Получите билет с номером",
     step3:"Напишите номер билета под постом акции в Instagram",
@@ -345,8 +336,7 @@ const DICT = {
 
     prizes_kicker:"Prizes", prizes_title:"Prizes of the month",
     prize_grand_tag:"Grand prize", prize_grand_desc:"Hi Food gift card",
-    prize2_tag:"3 gift cards", prize3_tag:"Shawarma", prize3:"free shawarmas",
-    prize4_tag:"BBQ skewers", prize4:"free BBQ skewers", drop:"Drop a food photo",
+    prize2_tag:"3 gift cards", prize3_tag:"Shawarma", prize3:"free shawarmas", drop:"Drop a food photo",
     how_kicker:"How it works", how_title:"How to play",
     step1:"Place an order", step2:"Get a numbered ticket",
     step3:"Comment your ticket number under the promo post on Instagram",
@@ -383,8 +373,7 @@ const DICT = {
 
     prizes_kicker:"Nagrade", prizes_title:"Nagrade meseca",
     prize_grand_tag:"Glavna nagrada", prize_grand_desc:"Hi Food poklon kartica",
-    prize2_tag:"3 poklon kartice", prize3_tag:"Šaurma", prize3:"besplatnih šaurmi",
-    prize4_tag:"Ražnjići", prize4:"besplatnih ražnjića", drop:"Prevuci foto hrane",
+    prize2_tag:"3 poklon kartice", prize3_tag:"Šaurma", prize3:"besplatnih šaurmi", drop:"Prevuci foto hrane",
     how_kicker:"Kako radi", how_title:"Kako učestvovati",
     step1:"Napravi porudžbinu", step2:"Dobij tiket sa brojem",
     step3:"Napiši broj tiketa ispod promo posta na Instagramu",
