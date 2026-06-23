@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Archivo','Helvetica Neue',Arial,sans-serif;background:#fff;color:#0B0B0B;-webkit-font-smoothing:antialiased;}
+::selection{background:#C7F500;color:#0B0B0B;}
+@keyframes rise{from{opacity:0;transform:translateY(46px);}to{opacity:1;transform:translateY(0);}}
+</style>
+</helmet>
+
+<div style="overflow:clip;">
+
+<!-- ============ TOP BAR ============ -->
+<div style="position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:12px;background:#0B0B0B;color:#fff;padding:11px clamp(16px,4vw,48px);">
+  <a href="https://hifood.space" style="display:flex;align-items:center;gap:9px;text-decoration:none;color:#fff;font-weight:900;letter-spacing:-.02em;font-size:18px;">
+    <span style="display:inline-block;width:12px;height:12px;border-radius:999px;background:#C7F500;"></span>HI FOOD
+  </a>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <div style="display:flex;gap:3px;background:rgba(255,255,255,.08);padding:3px;border-radius:999px;">
+      <button onClick="{{ langRu }}" style="{{ tabRu }}">RU</button>
+      <button onClick="{{ langEn }}" style="{{ tabEn }}">EN</button>
+      <button onClick="{{ langSr }}" style="{{ tabSr }}">SR</button>
+    </div>
+    <a href="../" style="display:flex;align-items:center;gap:6px;text-decoration:none;color:#fff;font-weight:700;font-size:13px;letter-spacing:.02em;border:1.5px solid rgba(255,255,255,.28);padding:7px 13px;border-radius:999px;" style-hover="background:#fff;color:#0B0B0B;border-color:#fff;">{{ t.nav_lucky }}<span style="font-size:15px;">←</span></a>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section style="overflow:hidden;">
+  <div style="padding:clamp(18px,3.5vw,38px) clamp(16px,4vw,48px) clamp(6px,1.5vw,14px);font-weight:700;font-size:clamp(11px,1.1vw,13px);letter-spacing:.2em;text-transform:uppercase;">
+    <span>{{ t.kicker }}</span>
+  </div>
+  <h1 style="font-weight:900;letter-spacing:-.035em;line-height:.85;text-transform:uppercase;padding:0 clamp(16px,4vw,48px) clamp(28px,4vw,48px);font-size:clamp(40px,8vw,120px);max-width:14ch;">{{ t.title }}</h1>
+  <div style="height:clamp(8px,1.2vw,14px);background:#FF3B00;"></div>
+</section>
+
+<!-- ============ RULES LIST ============ -->
+<section style="background:#fff;color:#0B0B0B;padding:clamp(48px,6vw,96px) clamp(16px,4vw,48px);">
+  <div style="max-width:820px;margin:0 auto;animation:rise linear both;animation-timeline:view();animation-range:entry 0% cover 18%;">
+    <sc-for list="{{ rules }}" as="rule">
+      <div style="display:flex;gap:clamp(14px,2vw,22px);align-items:flex-start;border-top:2px solid rgba(11,11,11,.1);padding:clamp(18px,2.5vw,28px) 0;">
+        <span style="font-size:clamp(22px,2.5vw,32px);flex:none;line-height:1.1;">{{ rule.num }}</span>
+        <p style="font-size:clamp(16px,1.8vw,21px);font-weight:500;line-height:1.45;text-wrap:pretty;">{{ rule.text }}</p>
+      </div>
+    </sc-for>
+    <div style="border-top:2px solid rgba(11,11,11,.1);padding-top:clamp(28px,4vw,44px);margin-top:clamp(8px,1vw,12px);">
+      <a href="../" style="display:inline-flex;align-items:center;gap:10px;background:#0B0B0B;color:#fff;text-decoration:none;font-weight:800;font-size:clamp(15px,1.6vw,18px);padding:15px 24px;border-radius:999px;transition:transform .18s;" style-hover="transform:translateY(-3px);">← {{ t.back }}</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer style="background:#C7F500;color:#0B0B0B;padding:clamp(40px,5vw,72px) clamp(16px,4vw,48px);">
+  <div style="font-size:clamp(34px,6vw,96px);font-weight:900;line-height:.85;letter-spacing:-.04em;text-transform:uppercase;max-width:18ch;">{{ t.footer_tagline }}</div>
+  <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(28px,4vw,44px);align-items:center;">
+    <a href="https://wolt.com" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#FF3B00;color:#fff;text-decoration:none;font-weight:800;font-size:16px;padding:14px 24px;border-radius:999px;" style-hover="transform:translateY(-3px);">Wolt ↗</a>
+    <a href="https://instagram.com/hi_food_serbia" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#0B0B0B;color:#fff;text-decoration:none;font-weight:800;font-size:16px;padding:14px 24px;border-radius:999px;" style-hover="transform:translateY(-3px);">Instagram ↗</a>
+    <a href="https://hifood.space" style="display:inline-flex;align-items:center;gap:8px;border:2.5px solid #0B0B0B;color:#0B0B0B;text-decoration:none;font-weight:800;font-size:16px;padding:12px 24px;border-radius:999px;margin-left:auto;" style-hover="background:#0B0B0B;color:#C7F500;">{{ t.footer_back }} ↗</a>
+  </div>
+  <div style="margin-top:clamp(28px,4vw,40px);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-weight:700;font-size:12px;letter-spacing:.04em;text-transform:uppercase;opacity:.6;">
+    <span>HI FOOD · hifood.space/lucky/rules</span>
+    <span>© 2026 HI FOOD</span>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const NUMS = ["1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣","7️⃣","8️⃣","9️⃣","🔟","1️⃣1️⃣","1️⃣2️⃣","1️⃣3️⃣"];
+
+const RULES = {
+  sr: [
+    "Jedna porudžbina = jedna karta sa jedinstvenim brojem.",
+    "Jedna karta učestvuje samo jednom.",
+    "Zapratite @hi_food_serbia.",
+    'Ispod objave napišite „Učestvujem" i broj svoje karte.',
+    "Jedan komentar = jedan broj karte.",
+    "Za svaki broj karte potrebno je ostaviti poseban komentar.",
+    "Sačuvajte kartu do objave rezultata.",
+    "Dobitnik preuzima nagradu uz originalnu kartu.",
+    "Vaučer nije moguće zameniti za novac.",
+    "Kusur se ne vraća.",
+    "Ako je račun veći od vrednosti vaučera, razliku je moguće doplatiti.",
+    "Vaučer se može iskoristiti samo jednom.",
+    "Organizator zadržava pravo da proveri autentičnost karte i odbije izdavanje nagrade u slučaju duplikata, oštećenja ili neslaganja broja."
+  ],
+  ru: [
+    "Один заказ = один билет с уникальным номером.",
+    "Один билет участвует только один раз.",
+    "Подпишитесь на @hi_food_serbia.",
+    "Под постом напишите «Участвую» и номер своего билета.",
+    "Один комментарий = один номер билета.",
+    "Для каждого номера необходимо оставить отдельный комментарий.",
+    "Сохраните билет до объявления результатов.",
+    "Приз выдается только при предъявлении оригинального билета.",
+    "Сертификат не обменивается на деньги.",
+    "Сдача по сертификату не выдается.",
+    "Если сумма заказа больше номинала сертификата, разницу можно доплатить.",
+    "Сертификат можно использовать только один раз.",
+    "Организатор оставляет за собой право проверить подлинность билета и отказать в выдаче приза при обнаружении дубликатов, повреждений или несоответствия номера."
+  ],
+  en: [
+    "One order = one ticket with a unique number.",
+    "Each ticket participates only once.",
+    "Follow @hi_food_serbia.",
+    "Comment \"I participate\" and your ticket number under the post.",
+    "One comment = one ticket number.",
+    "Each ticket number must be posted in a separate comment.",
+    "Keep your ticket until the winners are announced.",
+    "Prizes are given only upon presentation of the original ticket.",
+    "Vouchers cannot be exchanged for cash.",
+    "No change will be given.",
+    "If the purchase amount exceeds the voucher value, the difference can be paid additionally.",
+    "Each voucher can be used only once.",
+    "The organizer reserves the right to verify the authenticity of the ticket and refuse to issue a prize in case of duplicates, damage, or number mismatch."
+  ]
+};
+
+const DICT = {
+  ru: {
+    nav_lucky:"К акции", kicker:"Промо-акция Hi Food",
+    title:"Правила участия в акции", back:"Назад к акции",
+    footer_tagline:"Заказывай. Получай билет. Выигрывай.", footer_back:"На главную"
+  },
+  en: {
+    nav_lucky:"Back to promo", kicker:"Hi Food promo",
+    title:"Promo participation rules", back:"Back to promo",
+    footer_tagline:"Order. Get a ticket. Win.", footer_back:"Main site"
+  },
+  sr: {
+    nav_lucky:"Nazad na akciju", kicker:"Hi Food promo",
+    title:"Pravila učešća u akciji", back:"Nazad na akciju",
+    footer_tagline:"Poruči. Dobij tiket. Osvoji.", footer_back:"Početna"
+  }
+};
+
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    let lang='ru';
+    try{ const s=localStorage.getItem('hf_lang'); if(s&&DICT[s]) lang=s; }catch(e){}
+    this.state={ lang };
+  }
+  setLang(l){ try{localStorage.setItem('hf_lang',l);}catch(e){} this.setState({lang:l}); }
+  renderVals(){
+    const T=DICT[this.state.lang]||DICT.ru;
+    const list=RULES[this.state.lang]||RULES.ru;
+    const tab=a=>'padding:7px 13px;border-radius:999px;font-weight:800;font-size:13px;letter-spacing:.04em;cursor:pointer;border:none;transition:all .2s;background:'+(a?'#C7F500':'transparent')+';color:'+(a?'#0B0B0B':'#fff')+';';
+    return {
+      t:T,
+      rules:list.map((text,i)=>({num:NUMS[i],text})),
+      langRu:()=>this.setLang('ru'), langEn:()=>this.setLang('en'), langSr:()=>this.setLang('sr'),
+      tabRu:tab(this.state.lang==='ru'), tabEn:tab(this.state.lang==='en'), tabSr:tab(this.state.lang==='sr')
+    };
+  }
+}
+</script>
+</body>
+</html>

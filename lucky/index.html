@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Archivo','Helvetica Neue',Arial,sans-serif;background:#fff;color:#0B0B0B;-webkit-font-smoothing:antialiased;}
+::selection{background:#C7F500;color:#0B0B0B;}
+input::placeholder{color:#0B0B0B;opacity:.35;}
+@keyframes rise{from{opacity:0;transform:translateY(46px);}to{opacity:1;transform:translateY(0);}}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.2;}}
+@keyframes blink{0%,49%{opacity:1;}50%,100%{opacity:.15;}}
+</style>
+</helmet>
+
+<div style="overflow:clip;">
+
+<!-- ============ TOP BAR ============ -->
+<div style="position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:12px;background:#0B0B0B;color:#fff;padding:11px clamp(16px,4vw,48px);">
+  <a href="https://hifood.space" style="display:flex;align-items:center;gap:9px;text-decoration:none;color:#fff;font-weight:900;letter-spacing:-.02em;font-size:18px;">
+    <span style="display:inline-block;width:12px;height:12px;border-radius:999px;background:#C7F500;"></span>HI FOOD
+  </a>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <div style="display:flex;gap:3px;background:rgba(255,255,255,.08);padding:3px;border-radius:999px;">
+      <button onClick="{{ langRu }}" style="{{ tabRu }}">RU</button>
+      <button onClick="{{ langEn }}" style="{{ tabEn }}">EN</button>
+      <button onClick="{{ langSr }}" style="{{ tabSr }}">SR</button>
+    </div>
+    <a href="https://hifood.space" style="display:flex;align-items:center;gap:6px;text-decoration:none;color:#fff;font-weight:700;font-size:13px;letter-spacing:.02em;border:1.5px solid rgba(255,255,255,.28);padding:7px 13px;border-radius:999px;" style-hover="background:#fff;color:#0B0B0B;border-color:#fff;">{{ t.nav_main }}<span style="font-size:15px;">↗</span></a>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section data-screen-label="Hero" data-speaker-notes="Главный экран — крючок, обратный отсчёт и две CTA." style="overflow:hidden;">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:clamp(18px,3.5vw,38px) clamp(16px,4vw,48px) clamp(6px,1.5vw,14px);font-weight:700;font-size:clamp(11px,1.1vw,13px);letter-spacing:.2em;text-transform:uppercase;">
+    <span>{{ t.kicker }}</span>
+    <span style="display:flex;align-items:center;gap:8px;color:#FF3B00;"><span style="width:8px;height:8px;border-radius:999px;background:#FF3B00;animation:pulse 1.3s infinite;"></span>{{ t.hero_status }}</span>
+  </div>
+  <h1 style="font-weight:900;letter-spacing:-.035em;line-height:.8;text-transform:uppercase;">
+    <div style="padding:0 clamp(16px,4vw,48px);font-size:clamp(58px,15vw,250px);white-space:nowrap;">{{ t.heroWord1 }}</div>
+    <div style="background:#1A6BFF;color:#fff;padding:clamp(6px,1.2vw,18px) clamp(16px,4vw,48px);display:flex;align-items:center;gap:.18em;font-size:clamp(58px,15vw,250px);white-space:nowrap;">{{ t.heroWord2 }}<span style="display:inline-block;width:.46em;height:.46em;border-radius:999px;background:#C7F500;flex:none;"></span></div>
+  </h1>
+
+  <!-- countdown band -->
+  <div style="background:#0B0B0B;color:#fff;padding:clamp(20px,3vw,34px) clamp(16px,4vw,48px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;">
+    <div>
+      <div style="font-weight:800;font-size:clamp(12px,1.3vw,15px);letter-spacing:.16em;text-transform:uppercase;color:#C7F500;line-height:1.2;">{{ t.cd_until }}</div>
+      <div style="font-weight:900;font-size:clamp(22px,3vw,36px);letter-spacing:-.02em;color:#fff;margin-top:8px;">{{ t.cd_date }}</div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:clamp(10px,2vw,26px);">
+      <div style="text-align:center;"><div style="font-size:clamp(42px,7vw,90px);font-weight:900;line-height:.9;letter-spacing:-.03em;font-variant-numeric:tabular-nums;">{{ cd.d }}</div><div style="font-size:11px;letter-spacing:.16em;opacity:.55;margin-top:8px;text-transform:uppercase;">{{ t.cd_days }}</div></div>
+      <div style="font-size:clamp(42px,7vw,90px);font-weight:900;line-height:.9;opacity:.3;">:</div>
+      <div style="text-align:center;"><div style="font-size:clamp(42px,7vw,90px);font-weight:900;line-height:.9;letter-spacing:-.03em;font-variant-numeric:tabular-nums;">{{ cd.h }}</div><div style="font-size:11px;letter-spacing:.16em;opacity:.55;margin-top:8px;text-transform:uppercase;">{{ t.cd_hours }}</div></div>
+      <div style="font-size:clamp(42px,7vw,90px);font-weight:900;line-height:.9;opacity:.3;">:</div>
+      <div style="text-align:center;"><div style="font-size:clamp(42px,7vw,90px);font-weight:900;line-height:.9;letter-spacing:-.03em;font-variant-numeric:tabular-nums;">{{ cd.m }}</div><div style="font-size:11px;letter-spacing:.16em;opacity:.55;margin-top:8px;text-transform:uppercase;">{{ t.cd_mins }}</div></div>
+      <div style="font-size:clamp(42px,7vw,90px);font-weight:900;line-height:.9;opacity:.3;">:</div>
+      <div style="text-align:center;"><div style="font-size:clamp(42px,7vw,90px);font-weight:900;line-height:.9;letter-spacing:-.03em;color:#C7F500;font-variant-numeric:tabular-nums;">{{ cd.s }}</div><div style="font-size:11px;letter-spacing:.16em;opacity:.55;margin-top:8px;text-transform:uppercase;">{{ t.cd_secs }}</div></div>
+    </div>
+  </div>
+
+  <!-- intro + CTA -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(28px,4vw,56px);align-items:end;padding:clamp(36px,5vw,72px) clamp(16px,4vw,48px);">
+    <div>
+      <p style="font-size:clamp(26px,3.6vw,46px);font-weight:800;line-height:1.0;letter-spacing:-.025em;max-width:16ch;">{{ t.heroSub }}</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(24px,3vw,36px);">
+        <a href="https://wolt.com" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:#FF3B00;color:#fff;text-decoration:none;font-weight:800;font-size:clamp(15px,1.5vw,18px);padding:16px 26px;border-radius:999px;letter-spacing:-.01em;transition:transform .18s,box-shadow .18s;" style-hover="transform:translateY(-3px);box-shadow:0 12px 0 -4px rgba(255,59,0,.35);">{{ t.btnOrder }} <span style="font-size:18px;">↗</span></a>
+        <a href="https://instagram.com/hi_food_serbia" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:#0B0B0B;color:#fff;text-decoration:none;font-weight:800;font-size:clamp(15px,1.5vw,18px);padding:16px 26px;border-radius:999px;letter-spacing:-.01em;transition:transform .18s;" style-hover="transform:translateY(-3px);">{{ t.btnInsta }}</a>
+      </div>
+    </div>
+    <ul style="list-style:none;display:flex;flex-direction:column;gap:14px;">
+      <li style="display:flex;align-items:flex-start;gap:14px;font-size:clamp(16px,1.7vw,21px);font-weight:600;line-height:1.2;border-top:2px solid #0B0B0B;padding-top:14px;"><span style="font-weight:900;color:#1A6BFF;">01</span>{{ t.bullet1 }}</li>
+      <li style="display:flex;align-items:flex-start;gap:14px;font-size:clamp(16px,1.7vw,21px);font-weight:600;line-height:1.2;border-top:2px solid #0B0B0B;padding-top:14px;"><span style="font-weight:900;color:#14E06A;">02</span>{{ t.bullet2 }}</li>
+      <li style="display:flex;align-items:flex-start;gap:14px;font-size:clamp(16px,1.7vw,21px);font-weight:600;line-height:1.2;border-top:2px solid #0B0B0B;padding-top:14px;"><span style="font-weight:900;color:#FF3B00;">03</span>{{ t.bullet3 }}</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ MARQUEE STRIP ============ -->
+<div style="background:#C7F500;color:#0B0B0B;border-top:3px solid #0B0B0B;border-bottom:3px solid #0B0B0B;overflow:hidden;padding:14px 0;">
+  <div style="display:inline-block;white-space:nowrap;animation:marquee 26s linear infinite;font-weight:900;font-size:clamp(18px,2.4vw,30px);letter-spacing:-.01em;text-transform:uppercase;">
+    <span>{{ t.marquee }}</span><span>{{ t.marquee }}</span>
+  </div>
+</div>
+
+<!-- ============ LUCK METER ============ -->
+<section data-screen-label="Luck meter" data-speaker-notes="Рейтинг удачи — живой счётчик билетов и правило каждого 100-го." style="background:#0B0B0B;color:#fff;padding:clamp(48px,6vw,96px) clamp(16px,4vw,48px);overflow:hidden;">
+  <div style="font-weight:800;font-size:clamp(12px,1.3vw,15px);letter-spacing:.18em;text-transform:uppercase;color:#C7F500;margin-bottom:clamp(28px,4vw,48px);">{{ t.luck_kicker }}</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(28px,4vw,56px);animation:rise linear both;animation-timeline:view();animation-range:entry 0% cover 24%;">
+    <div>
+      <div style="font-size:clamp(12px,1.3vw,15px);letter-spacing:.14em;text-transform:uppercase;opacity:.55;margin-bottom:12px;">{{ t.luck_issued_label }}</div>
+      <div style="font-size:clamp(72px,13vw,170px);font-weight:900;line-height:.82;letter-spacing:-.04em;font-variant-numeric:tabular-nums;">{{ issuedFmt }}</div>
+      <div style="font-size:clamp(16px,1.8vw,22px);font-weight:700;margin-top:8px;text-transform:uppercase;letter-spacing:.02em;">{{ t.luck_tickets }}</div>
+    </div>
+    <div>
+      <div style="font-size:clamp(12px,1.3vw,15px);letter-spacing:.14em;text-transform:uppercase;opacity:.55;margin-bottom:12px;">{{ t.luck_next_label }}</div>
+      <div style="font-size:clamp(56px,10vw,140px);font-weight:900;line-height:.82;letter-spacing:-.03em;color:#C7F500;font-variant-numeric:tabular-nums;">{{ nextLuckyFmt }}</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRIZES ============ -->
+<section data-screen-label="Prizes" data-speaker-notes="Призы месяца — карточки с едой и сертификатами." style="background:#EEEDE8;padding:clamp(48px,6vw,96px) clamp(16px,4vw,48px);">
+  <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:clamp(28px,4vw,48px);">
+    <div>
+      <div style="font-weight:800;font-size:clamp(12px,1.3vw,15px);letter-spacing:.18em;text-transform:uppercase;color:#FF3B00;margin-bottom:10px;">{{ t.prizes_kicker }}</div>
+      <h2 style="font-size:clamp(40px,7vw,110px);font-weight:900;line-height:.85;letter-spacing:-.035em;text-transform:uppercase;">{{ t.prizes_title }}</h2>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:clamp(12px,1.5vw,18px);animation:rise linear both;animation-timeline:view();animation-range:entry 0% cover 18%;">
+    <!-- grand -->
+    <div style="background:#FF3B00;color:#fff;border-radius:4px;padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:18px;min-height:clamp(220px,26vw,340px);justify-content:space-between;overflow:hidden;">
+      <div style="display:inline-flex;align-self:flex-start;align-items:center;gap:8px;background:#0B0B0B;font-weight:800;font-size:clamp(12px,1.3vw,15px);letter-spacing:.1em;text-transform:uppercase;padding:9px 15px;border-radius:999px;white-space:nowrap;">🥇 {{ t.prize_grand_tag }}</div>
+      <div style="font-size:clamp(70px,14vw,210px);font-weight:900;line-height:.78;letter-spacing:-.04em;white-space:nowrap;">5 000<span style="font-size:.32em;vertical-align:super;font-weight:800;"> RSD</span></div>
+      <div style="font-size:clamp(16px,1.8vw,22px);font-weight:700;text-transform:uppercase;letter-spacing:.02em;">{{ t.prize_grand_desc }}</div>
+    </div>
+    <!-- three cards -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:clamp(12px,1.5vw,18px);">
+      <!-- 3 x 1000 -->
+      <div style="background:#1A6BFF;color:#fff;border-radius:4px;padding:clamp(24px,3vw,36px);min-height:clamp(300px,30vw,400px);display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;">
+        <div style="display:inline-flex;align-self:flex-start;align-items:center;gap:8px;background:rgba(255,255,255,.18);font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;padding:9px 14px;border-radius:999px;white-space:nowrap;">🥈 {{ t.prize2_tag }}</div>
+        <div>
+          <div style="font-size:clamp(56px,8vw,108px);font-weight:900;line-height:.82;letter-spacing:-.03em;">1 000<span style="font-size:.34em;vertical-align:super;font-weight:800;"> RSD</span></div>
+          <div style="font-size:clamp(18px,2vw,26px);font-weight:800;margin-top:6px;">× 3</div>
+        </div>
+      </div>
+      <!-- shawarma -->
+      <div style="background:#14E06A;color:#0B0B0B;border-radius:4px;display:flex;flex-direction:column;min-height:clamp(300px,30vw,400px);overflow:hidden;">
+        <image-slot id="prize-shawarma" shape="rect" placeholder="{{ t.drop }}" style="width:100%;flex:1;min-height:160px;background:rgba(0,0,0,.06);"></image-slot>
+        <div style="padding:clamp(18px,2vw,24px);display:flex;align-items:flex-end;justify-content:space-between;gap:12px;">
+          <div><div style="font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.6;">{{ t.prize3_tag }}</div><div style="font-size:clamp(20px,2.3vw,28px);font-weight:900;line-height:1.0;letter-spacing:-.02em;margin-top:4px;">{{ t.prize3 }}</div></div>
+          <div style="font-size:clamp(28px,4vw,48px);font-weight:900;line-height:.8;letter-spacing:-.03em;flex:none;">×10</div>
+        </div>
+      </div>
+      <!-- shashlik -->
+      <div style="background:#C7F500;color:#0B0B0B;border-radius:4px;display:flex;flex-direction:column;min-height:clamp(300px,30vw,400px);overflow:hidden;">
+        <image-slot id="prize-shashlik" shape="rect" placeholder="{{ t.drop }}" style="width:100%;flex:1;min-height:160px;background:rgba(0,0,0,.06);"></image-slot>
+        <div style="padding:clamp(18px,2vw,24px);display:flex;align-items:flex-end;justify-content:space-between;gap:12px;">
+          <div><div style="font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.6;">{{ t.prize4_tag }}</div><div style="font-size:clamp(20px,2.3vw,28px);font-weight:900;line-height:1.0;letter-spacing:-.02em;margin-top:4px;">{{ t.prize4 }}</div></div>
+          <div style="font-size:clamp(28px,4vw,48px);font-weight:900;line-height:.8;letter-spacing:-.03em;flex:none;">×5</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW TO PLAY ============ -->
+<section data-screen-label="How to play" data-speaker-notes="Правила за 30 секунд: 5 шагов + схема." style="background:#1A6BFF;color:#fff;padding:clamp(48px,6vw,96px) clamp(16px,4vw,48px);overflow:hidden;">
+  <div style="font-weight:800;font-size:clamp(12px,1.3vw,15px);letter-spacing:.18em;text-transform:uppercase;color:#C7F500;margin-bottom:10px;">{{ t.how_kicker }}</div>
+  <h2 style="font-size:clamp(40px,7vw,110px);font-weight:900;line-height:.85;letter-spacing:-.035em;text-transform:uppercase;margin-bottom:clamp(32px,4vw,56px);">{{ t.how_title }}</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:clamp(14px,2vw,24px);animation:rise linear both;animation-timeline:view();animation-range:entry 0% cover 22%;">
+    <div style="border-top:3px solid #fff;padding-top:16px;"><div style="font-size:clamp(40px,5vw,72px);font-weight:900;line-height:.9;letter-spacing:-.03em;color:#C7F500;">01</div><p style="font-size:clamp(15px,1.5vw,19px);font-weight:600;line-height:1.2;margin-top:12px;">{{ t.step1 }}</p></div>
+    <div style="border-top:3px solid #fff;padding-top:16px;"><div style="font-size:clamp(40px,5vw,72px);font-weight:900;line-height:.9;letter-spacing:-.03em;color:#C7F500;">02</div><p style="font-size:clamp(15px,1.5vw,19px);font-weight:600;line-height:1.2;margin-top:12px;">{{ t.step2 }}</p></div>
+    <div style="border-top:3px solid #fff;padding-top:16px;"><div style="font-size:clamp(40px,5vw,72px);font-weight:900;line-height:.9;letter-spacing:-.03em;color:#C7F500;">03</div><p style="font-size:clamp(15px,1.5vw,19px);font-weight:600;line-height:1.2;margin-top:12px;">{{ t.step3 }}</p></div>
+    <div style="border-top:3px solid #fff;padding-top:16px;"><div style="font-size:clamp(40px,5vw,72px);font-weight:900;line-height:.9;letter-spacing:-.03em;color:#C7F500;">04</div><p style="font-size:clamp(15px,1.5vw,19px);font-weight:600;line-height:1.2;margin-top:12px;">{{ t.step4 }}</p></div>
+    <div style="border-top:3px solid #fff;padding-top:16px;"><div style="font-size:clamp(40px,5vw,72px);font-weight:900;line-height:.9;letter-spacing:-.03em;color:#C7F500;">05</div><p style="font-size:clamp(15px,1.5vw,19px);font-weight:600;line-height:1.2;margin-top:12px;">{{ t.step5 }}</p></div>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:clamp(36px,4vw,56px);">
+    <span style="background:#fff;color:#0B0B0B;font-weight:800;font-size:clamp(13px,1.4vw,17px);padding:11px 18px;border-radius:999px;text-transform:uppercase;letter-spacing:.02em;">{{ t.scheme1 }}</span>
+    <span style="color:#C7F500;font-size:22px;font-weight:900;">→</span>
+    <span style="background:#fff;color:#0B0B0B;font-weight:800;font-size:clamp(13px,1.4vw,17px);padding:11px 18px;border-radius:999px;text-transform:uppercase;letter-spacing:.02em;">{{ t.scheme2 }}</span>
+    <span style="color:#C7F500;font-size:22px;font-weight:900;">→</span>
+    <span style="background:#fff;color:#0B0B0B;font-weight:800;font-size:clamp(13px,1.4vw,17px);padding:11px 18px;border-radius:999px;text-transform:uppercase;letter-spacing:.02em;">{{ t.scheme3 }}</span>
+    <span style="color:#C7F500;font-size:22px;font-weight:900;">→</span>
+    <span style="background:#fff;color:#0B0B0B;font-weight:800;font-size:clamp(13px,1.4vw,17px);padding:11px 18px;border-radius:999px;text-transform:uppercase;letter-spacing:.02em;">{{ t.scheme4 }}</span>
+    <span style="color:#C7F500;font-size:22px;font-weight:900;">→</span>
+    <span style="background:#C7F500;color:#0B0B0B;font-weight:900;font-size:clamp(13px,1.4vw,17px);padding:11px 18px;border-radius:999px;text-transform:uppercase;letter-spacing:.02em;">{{ t.scheme5 }} 🏆</span>
+  </div>
+</section>
+
+<!-- ============ CHECK TICKET ============ -->
+<section data-screen-label="Check ticket" data-speaker-notes="Проверка билета — повышает доверие." style="background:#C7F500;color:#0B0B0B;padding:clamp(48px,6vw,96px) clamp(16px,4vw,48px);">
+  <div style="font-weight:800;font-size:clamp(12px,1.3vw,15px);letter-spacing:.18em;text-transform:uppercase;color:#FF3B00;margin-bottom:10px;">{{ t.check_kicker }}</div>
+  <h2 style="font-size:clamp(40px,7vw,110px);font-weight:900;line-height:.85;letter-spacing:-.035em;text-transform:uppercase;">{{ t.check_title }}</h2>
+  <p style="font-size:clamp(16px,1.8vw,22px);font-weight:600;max-width:34ch;line-height:1.25;margin-top:18px;">{{ t.check_desc }}</p>
+  <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(24px,3vw,36px);max-width:640px;">
+    <input value="{{ ticket }}" onChange="{{ onTicket }}" onKeyDown="{{ onTicketKey }}" placeholder="HF-001842" style="flex:1;min-width:220px;background:#fff;border:3px solid #0B0B0B;border-radius:4px;padding:16px 20px;font-family:inherit;font-weight:800;font-size:clamp(18px,2.2vw,26px);letter-spacing:.04em;color:#0B0B0B;outline:none;text-transform:uppercase;" />
+    <button onClick="{{ checkTicket }}" style="background:#0B0B0B;color:#fff;border:none;border-radius:4px;padding:16px 30px;font-family:inherit;font-weight:800;font-size:clamp(16px,1.8vw,20px);cursor:pointer;letter-spacing:.01em;transition:transform .18s;" style-hover="transform:translateY(-3px);">{{ t.check_btn }}</button>
+  </div>
+  <div style="font-size:13px;font-weight:600;opacity:.55;margin-top:10px;">{{ t.check_hint }}</div>
+  <sc-if value="{{ showResult }}" hint-placeholder-val="{{ false }}">
+    <div style="margin-top:20px;max-width:640px;">
+      <div style="{{ resultStyle }}">
+        <span style="font-size:clamp(28px,3.5vw,40px);font-weight:900;line-height:1;flex:none;">{{ resultIcon }}</span>
+        <div><div style="font-size:clamp(18px,2.2vw,26px);font-weight:900;letter-spacing:-.01em;line-height:1.05;">{{ resultText }}</div><div style="font-size:14px;font-weight:700;opacity:.7;margin-top:4px;font-variant-numeric:tabular-nums;">{{ resultNum }}</div></div>
+      </div>
+    </div>
+  </sc-if>
+</section>
+
+<!-- ============ LATEST TICKETS ============ -->
+<section data-screen-label="Latest tickets" data-speaker-notes="Последние билеты — акция живая прямо сейчас." style="background:#0B0B0B;color:#fff;padding:clamp(48px,6vw,80px) 0;overflow:hidden;">
+  <div style="display:flex;align-items:center;gap:12px;padding:0 clamp(16px,4vw,48px);margin-bottom:clamp(24px,3vw,40px);">
+    <span style="width:10px;height:10px;border-radius:999px;background:#FF3B00;animation:blink 1s infinite;flex:none;"></span>
+    <span style="font-weight:800;font-size:clamp(12px,1.3vw,15px);letter-spacing:.18em;text-transform:uppercase;color:#FF3B00;">{{ t.latest_kicker }}</span>
+    <span style="font-weight:800;font-size:clamp(12px,1.3vw,15px);letter-spacing:.06em;text-transform:uppercase;opacity:.55;">— {{ t.latest_title }}</span>
+  </div>
+  <div style="overflow:hidden;border-top:2px solid rgba(255,255,255,.15);border-bottom:2px solid rgba(255,255,255,.15);padding:clamp(18px,2.5vw,30px) 0;">
+    <div style="display:inline-block;white-space:nowrap;animation:marquee 30s linear infinite;font-weight:900;font-size:clamp(34px,6vw,90px);letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:#C7F500;">
+      <span>{{ feedStr }}</span><span>{{ feedStr }}</span>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(12px,1.5vw,18px);padding:clamp(24px,3vw,40px) clamp(16px,4vw,48px) 0;">
+    <div style="border:2px solid rgba(255,255,255,.15);border-radius:4px;padding:20px;"><div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.5;">{{ t.latest_now }}</div><div style="font-size:clamp(28px,3.4vw,42px);font-weight:900;letter-spacing:-.02em;margin-top:6px;font-variant-numeric:tabular-nums;">{{ latest1 }}</div></div>
+    <div style="border:2px solid rgba(255,255,255,.15);border-radius:4px;padding:20px;"><div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.5;">{{ t.latest_now }}</div><div style="font-size:clamp(28px,3.4vw,42px);font-weight:900;letter-spacing:-.02em;margin-top:6px;font-variant-numeric:tabular-nums;">{{ latest2 }}</div></div>
+    <div style="border:2px solid rgba(255,255,255,.15);border-radius:4px;padding:20px;"><div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.5;">{{ t.latest_now }}</div><div style="font-size:clamp(28px,3.4vw,42px);font-weight:900;letter-spacing:-.02em;margin-top:6px;font-variant-numeric:tabular-nums;">{{ latest3 }}</div></div>
+  </div>
+</section>
+
+<!-- ============ WINNERS ============ -->
+<section data-screen-label="Winners" data-speaker-notes="Победители прошлого розыгрыша." style="background:#FF3B00;color:#fff;padding:clamp(48px,6vw,96px) clamp(16px,4vw,48px);overflow:hidden;">
+  <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:clamp(28px,4vw,48px);">
+    <div>
+      <div style="font-weight:800;font-size:clamp(12px,1.3vw,15px);letter-spacing:.18em;text-transform:uppercase;color:#0B0B0B;margin-bottom:10px;">{{ t.winners_kicker }}</div>
+      <h2 style="font-size:clamp(40px,7vw,110px);font-weight:900;line-height:.85;letter-spacing:-.035em;text-transform:uppercase;">{{ t.winners_title }}</h2>
+    </div>
+    <div style="background:#0B0B0B;color:#fff;font-weight:800;font-size:clamp(15px,1.7vw,20px);padding:12px 20px;border-radius:999px;">{{ t.winners_month }}</div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:clamp(10px,1.4vw,16px);animation:rise linear both;animation-timeline:view();animation-range:entry 0% cover 22%;">
+    <div style="background:#fff;color:#0B0B0B;border-radius:4px;padding:clamp(20px,2.6vw,30px);display:flex;align-items:center;gap:clamp(16px,2.5vw,32px);">
+      <span style="font-size:clamp(34px,5vw,64px);flex:none;">🥇</span>
+      <div style="font-size:clamp(28px,5vw,64px);font-weight:900;letter-spacing:-.02em;line-height:.9;text-transform:uppercase;">{{ t.winners_placeholder }}</div>
+      <div style="margin-left:auto;text-align:right;font-weight:800;font-size:clamp(13px,1.5vw,18px);text-transform:uppercase;letter-spacing:.04em;">{{ t.winners_grand }}<br><span style="opacity:.5;">5 000 RSD</span></div>
+    </div>
+    <div style="background:#fff;color:#0B0B0B;border-radius:4px;padding:clamp(20px,2.6vw,30px);display:flex;align-items:center;gap:clamp(16px,2.5vw,32px);">
+      <span style="font-size:clamp(34px,5vw,64px);flex:none;">🥈</span>
+      <div style="font-size:clamp(28px,5vw,64px);font-weight:900;letter-spacing:-.02em;line-height:.9;text-transform:uppercase;">{{ t.winners_placeholder }}</div>
+      <div style="margin-left:auto;text-align:right;font-weight:800;font-size:clamp(13px,1.5vw,18px);text-transform:uppercase;letter-spacing:.04em;">{{ t.winners_second }}<br><span style="opacity:.5;">1 000 RSD</span></div>
+    </div>
+    <div style="background:#fff;color:#0B0B0B;border-radius:4px;padding:clamp(20px,2.6vw,30px);display:flex;align-items:center;gap:clamp(16px,2.5vw,32px);">
+      <span style="font-size:clamp(34px,5vw,64px);flex:none;">🥈</span>
+      <div style="font-size:clamp(28px,5vw,64px);font-weight:900;letter-spacing:-.02em;line-height:.9;text-transform:uppercase;">{{ t.winners_placeholder }}</div>
+      <div style="margin-left:auto;text-align:right;font-weight:800;font-size:clamp(13px,1.5vw,18px);text-transform:uppercase;letter-spacing:.04em;">{{ t.winners_second }}<br><span style="opacity:.5;">1 000 RSD</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RULES ============ -->
+<section data-screen-label="Rules" data-speaker-notes="Краткие правила + ссылка на полные." style="background:#fff;color:#0B0B0B;padding:clamp(48px,6vw,96px) clamp(16px,4vw,48px);">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(28px,4vw,56px);align-items:start;">
+    <div>
+      <div style="font-weight:800;font-size:clamp(12px,1.3vw,15px);letter-spacing:.18em;text-transform:uppercase;color:#1A6BFF;margin-bottom:10px;">{{ t.rules_kicker }}</div>
+      <h2 style="font-size:clamp(36px,5.5vw,80px);font-weight:900;line-height:.85;letter-spacing:-.035em;text-transform:uppercase;">{{ t.rules_title }}</h2>
+    </div>
+    <div>
+      <p style="font-size:clamp(16px,1.8vw,21px);font-weight:500;line-height:1.45;text-wrap:pretty;">{{ t.rules_body }}</p>
+      <a href="./rules/" style="display:inline-flex;align-items:center;gap:10px;margin-top:24px;background:#0B0B0B;color:#fff;text-decoration:none;font-weight:800;font-size:clamp(15px,1.6vw,18px);padding:15px 24px;border-radius:999px;transition:transform .18s;" style-hover="transform:translateY(-3px);">{{ t.rules_btn }} <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INSTAGRAM ============ -->
+<section data-screen-label="Instagram" data-speaker-notes="CTA на подписку в Instagram." style="background:#0B0B0B;color:#fff;padding:clamp(48px,6vw,96px) clamp(16px,4vw,48px);overflow:hidden;">
+  <div style="font-weight:800;font-size:clamp(12px,1.3vw,15px);letter-spacing:.18em;text-transform:uppercase;color:#C7F500;margin-bottom:10px;">{{ t.insta_kicker }}</div>
+  <h2 style="font-size:clamp(40px,8vw,130px);font-weight:900;line-height:.82;letter-spacing:-.04em;text-transform:uppercase;">{{ t.insta_title }}</h2>
+  <div style="font-size:clamp(28px,4vw,56px);font-weight:900;letter-spacing:-.02em;background:linear-gradient(90deg,#FF3B00,#C7F500,#1A6BFF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-top:14px;">{{ t.insta_handle }}</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:clamp(12px,1.5vw,18px);margin-top:clamp(28px,4vw,44px);">
+    <div style="border-top:2px solid rgba(255,255,255,.2);padding-top:14px;font-weight:700;font-size:clamp(15px,1.6vw,19px);">{{ t.insta1 }}</div>
+    <div style="border-top:2px solid rgba(255,255,255,.2);padding-top:14px;font-weight:700;font-size:clamp(15px,1.6vw,19px);">{{ t.insta2 }}</div>
+    <div style="border-top:2px solid rgba(255,255,255,.2);padding-top:14px;font-weight:700;font-size:clamp(15px,1.6vw,19px);">{{ t.insta3 }}</div>
+    <div style="border-top:2px solid rgba(255,255,255,.2);padding-top:14px;font-weight:700;font-size:clamp(15px,1.6vw,19px);">{{ t.insta4 }}</div>
+  </div>
+  <a href="https://instagram.com/hi_food_serbia" target="_blank" style="display:inline-flex;align-items:center;gap:10px;margin-top:clamp(28px,4vw,44px);background:#fff;color:#0B0B0B;text-decoration:none;font-weight:900;font-size:clamp(16px,2vw,22px);padding:18px 32px;border-radius:999px;letter-spacing:-.01em;transition:transform .18s;" style-hover="transform:translateY(-3px);">{{ t.insta_btn }} @hi_food_serbia <span style="font-size:20px;">↗</span></a>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer style="background:#C7F500;color:#0B0B0B;padding:clamp(40px,5vw,72px) clamp(16px,4vw,48px);">
+  <div style="font-size:clamp(34px,6vw,96px);font-weight:900;line-height:.85;letter-spacing:-.04em;text-transform:uppercase;max-width:18ch;">{{ t.footer_tagline }}</div>
+  <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(28px,4vw,44px);align-items:center;">
+    <a href="https://wolt.com" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#FF3B00;color:#fff;text-decoration:none;font-weight:800;font-size:16px;padding:14px 24px;border-radius:999px;" style-hover="transform:translateY(-3px);">Wolt ↗</a>
+    <a href="https://instagram.com/hi_food_serbia" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#0B0B0B;color:#fff;text-decoration:none;font-weight:800;font-size:16px;padding:14px 24px;border-radius:999px;" style-hover="transform:translateY(-3px);">Instagram ↗</a>
+    <a href="https://hifood.space" style="display:inline-flex;align-items:center;gap:8px;border:2.5px solid #0B0B0B;color:#0B0B0B;text-decoration:none;font-weight:800;font-size:16px;padding:12px 24px;border-radius:999px;margin-left:auto;" style-hover="background:#0B0B0B;color:#C7F500;">{{ t.footer_back }} ↗</a>
+  </div>
+  <div style="margin-top:clamp(28px,4vw,40px);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-weight:700;font-size:12px;letter-spacing:.04em;text-transform:uppercase;opacity:.6;">
+    <span>HI FOOD · hifood.space/lucky</span>
+    <span>© 2026 HI FOOD</span>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const DICT = {
+  ru: {
+    nav_main:"На главную", kicker:"Промо-акция Hi Food", hero_status:"Розыгрыш 22 июля",
+    heroWord1:"Счастливый", heroWord2:"Билет",
+    heroSub:"Каждый заказ может стать выигрышным.",
+    bullet1:"Получай билет с уникальным номером",
+    bullet2:"Участвуй в ежемесячном розыгрыше призов",
+    bullet3:"Заказывай любимые блюда и выигрывай",
+    btnOrder:"Заказать в Wolt", btnInsta:"Instagram",
+    cd_until:"До розыгрыша осталось", cd_date:"22 июля 2026", cd_days:"дней", cd_hours:"часов", cd_mins:"минут", cd_secs:"секунд",
+    marquee:"🎟 Каждый заказ может стать выигрышным  ✦  Получай билеты  ✦  Выигрывай призы  ✦  ",
+    luck_kicker:"Рейтинг удачи", luck_issued_label:"Уже выдано", luck_tickets:"билетов",
+    luck_next_label:"Следующий счастливый билет",
+
+    prizes_kicker:"Призы", prizes_title:"Призы месяца",
+    prize_grand_tag:"Главный приз", prize_grand_desc:"Сертификат Hi Food",
+    prize2_tag:"3 сертификата", prize3_tag:"Шаурма", prize3:"бесплатных шаурм",
+    prize4_tag:"Шашлык", prize4:"бесплатных шашлыков", drop:"Перетащи фото еды",
+    how_kicker:"Инструкция", how_title:"Как участвовать",
+    step1:"Сделайте заказ", step2:"Получите билет с номером",
+    step3:"Напишите номер билета под постом акции в Instagram",
+    step4:"Сохраните билет до даты розыгрыша", step5:"Следите за результатами",
+    scheme1:"Заказ", scheme2:"Билет", scheme3:"Комментарий", scheme4:"Розыгрыш", scheme5:"Победа",
+    check_kicker:"Проверка", check_title:"Проверить билет",
+    check_desc:"Введите номер билета, чтобы убедиться, что он участвует в розыгрыше.",
+    check_hint:"Формат: HF-001842", check_btn:"Проверить",
+    check_ok:"Билет зарегистрирован", check_fail:"Билет не найден",
+    check_lucky:"Счастливый билет! Бесплатная шаурма 🌯",
+    latest_kicker:"В прямом эфире", latest_title:"Последние выданные билеты", latest_now:"только что",
+    winners_kicker:"Зал славы", winners_title:"Победители", winners_month:"Июль 2026",
+    winners_placeholder:"Ваш номер", winners_grand:"Главный приз", winners_second:"Сертификат",
+    rules_kicker:"Правила", rules_title:"Коротко о правилах",
+    rules_body:"Один заказ — один билет. Билеты участвуют в ежемесячном розыгрыше. Чтобы билет был засчитан, оставьте его номер под постом акции в Instagram до даты розыгрыша. Победители определяются случайным образом и публикуются в нашем профиле.",
+    rules_btn:"Полные правила акции",
+    insta_kicker:"Instagram", insta_title:"Подпишись на Hi Food", insta_handle:"@hi_food_serbia",
+    insta1:"Новые призы", insta2:"Даты розыгрышей", insta3:"Результаты", insta4:"Специальные акции",
+    insta_btn:"Подписаться",
+    footer_tagline:"Заказывай. Получай билет. Выигрывай.", footer_back:"На главную"
+  },
+  en: {
+    nav_main:"Main site", kicker:"Hi Food promo", hero_status:"Draw July 22",
+    heroWord1:"Lucky", heroWord2:"Ticket",
+    heroSub:"Every order can be a winner.",
+    bullet1:"Get a ticket with a unique number",
+    bullet2:"Join the monthly prize draw",
+    bullet3:"Order your favourites and win",
+    btnOrder:"Order on Wolt", btnInsta:"Instagram",
+    cd_until:"Time until the draw", cd_date:"July 22, 2026", cd_days:"days", cd_hours:"hours", cd_mins:"mins", cd_secs:"secs",
+    marquee:"🎟 Every order can be a winner  ✦  Collect tickets  ✦  Win prizes  ✦  ",
+    luck_kicker:"Luck meter", luck_issued_label:"Already issued", luck_tickets:"tickets",
+    luck_next_label:"Next lucky ticket",
+
+    prizes_kicker:"Prizes", prizes_title:"Prizes of the month",
+    prize_grand_tag:"Grand prize", prize_grand_desc:"Hi Food gift card",
+    prize2_tag:"3 gift cards", prize3_tag:"Shawarma", prize3:"free shawarmas",
+    prize4_tag:"BBQ skewers", prize4:"free BBQ skewers", drop:"Drop a food photo",
+    how_kicker:"How it works", how_title:"How to play",
+    step1:"Place an order", step2:"Get a numbered ticket",
+    step3:"Comment your ticket number under the promo post on Instagram",
+    step4:"Keep your ticket until the draw date", step5:"Follow the results",
+    scheme1:"Order", scheme2:"Ticket", scheme3:"Comment", scheme4:"Draw", scheme5:"Win",
+    check_kicker:"Verify", check_title:"Check your ticket",
+    check_desc:"Enter your ticket number to confirm it's in the draw.",
+    check_hint:"Format: HF-001842", check_btn:"Check",
+    check_ok:"Ticket registered", check_fail:"Ticket not found",
+    check_lucky:"Lucky ticket! Free shawarma 🌯",
+    latest_kicker:"Live", latest_title:"Latest issued tickets", latest_now:"just now",
+    winners_kicker:"Hall of fame", winners_title:"Winners", winners_month:"July 2026",
+    winners_placeholder:"Your number", winners_grand:"Grand prize", winners_second:"Gift card",
+    rules_kicker:"Rules", rules_title:"Rules in brief",
+    rules_body:"One order — one ticket. Tickets enter the monthly draw. To qualify, comment your ticket number under the promo post on Instagram before the draw date. Winners are picked at random and published on our profile.",
+    rules_btn:"Full promo rules",
+    insta_kicker:"Instagram", insta_title:"Follow Hi Food", insta_handle:"@hi_food_serbia",
+    insta1:"New prizes", insta2:"Draw dates", insta3:"Results", insta4:"Special offers",
+    insta_btn:"Follow",
+    footer_tagline:"Order. Get a ticket. Win.", footer_back:"Main site"
+  },
+  sr: {
+    nav_main:"Početna", kicker:"Hi Food promo", hero_status:"Izvlačenje 22. jul",
+    heroWord1:"Srećan", heroWord2:"Tiket",
+    heroSub:"Svaka porudžbina može biti dobitna.",
+    bullet1:"Dobij tiket sa jedinstvenim brojem",
+    bullet2:"Učestvuj u mesečnom izvlačenju nagrada",
+    bullet3:"Naruči omiljena jela i osvajaj",
+    btnOrder:"Poruči na Wolt", btnInsta:"Instagram",
+    cd_until:"Do izvlačenja je ostalo", cd_date:"22. jul 2026", cd_days:"dana", cd_hours:"sati", cd_mins:"min", cd_secs:"sek",
+    marquee:"🎟 Svaka porudžbina može biti dobitna  ✦  Skupljaj tikete  ✦  Osvajaj nagrade  ✦  ",
+    luck_kicker:"Merač sreće", luck_issued_label:"Već izdato", luck_tickets:"tiketa",
+    luck_next_label:"Sledeći srećan tiket",
+
+    prizes_kicker:"Nagrade", prizes_title:"Nagrade meseca",
+    prize_grand_tag:"Glavna nagrada", prize_grand_desc:"Hi Food poklon kartica",
+    prize2_tag:"3 poklon kartice", prize3_tag:"Šaurma", prize3:"besplatnih šaurmi",
+    prize4_tag:"Ražnjići", prize4:"besplatnih ražnjića", drop:"Prevuci foto hrane",
+    how_kicker:"Kako radi", how_title:"Kako učestvovati",
+    step1:"Napravi porudžbinu", step2:"Dobij tiket sa brojem",
+    step3:"Napiši broj tiketa ispod promo posta na Instagramu",
+    step4:"Sačuvaj tiket do datuma izvlačenja", step5:"Prati rezultate",
+    scheme1:"Porudžbina", scheme2:"Tiket", scheme3:"Komentar", scheme4:"Izvlačenje", scheme5:"Pobeda",
+    check_kicker:"Provera", check_title:"Proveri tiket",
+    check_desc:"Unesi broj tiketa da potvrdiš da učestvuje u izvlačenju.",
+    check_hint:"Format: HF-001842", check_btn:"Proveri",
+    check_ok:"Tiket je registrovan", check_fail:"Tiket nije pronađen",
+    check_lucky:"Srećan tiket! Besplatna šaurma 🌯",
+    latest_kicker:"Uživo", latest_title:"Poslednji izdati tiketi", latest_now:"upravo sada",
+    winners_kicker:"Kuća slavnih", winners_title:"Pobednici", winners_month:"Jul 2026",
+    winners_placeholder:"Vaš broj", winners_grand:"Glavna nagrada", winners_second:"Poklon kartica",
+    rules_kicker:"Pravila", rules_title:"Pravila ukratko",
+    rules_body:"Jedna porudžbina — jedan tiket. Tiketi učestvuju u mesečnom izvlačenju. Da bi tiket bio validan, ostavi njegov broj ispod promo posta na Instagramu pre datuma izvlačenja. Pobednici se biraju nasumično i objavljuju na našem profilu.",
+    rules_btn:"Kompletna pravila",
+    insta_kicker:"Instagram", insta_title:"Zaprati Hi Food", insta_handle:"@hi_food_serbia",
+    insta1:"Nove nagrade", insta2:"Datumi izvlačenja", insta3:"Rezultati", insta4:"Specijalne ponude",
+    insta_btn:"Zaprati",
+    footer_tagline:"Poruči. Dobij tiket. Osvoji.", footer_back:"Početna"
+  }
+};
+
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    let lang='ru';
+    try{ const s=localStorage.getItem('hf_lang'); if(s&&DICT[s]) lang=s; }catch(e){}
+    const seed=1842;
+    const feed=[]; for(let i=0;i<8;i++) feed.push(seed-i);
+    this.state={ lang, now:Date.now(), issued:seed, feed, ticket:'', check:null };
+  }
+  componentDidMount(){
+    this._t=setInterval(()=>this.setState({now:Date.now()}),1000);
+    this._i=setInterval(()=>{
+      this.setState(s=>{
+        const inc=1+Math.floor(Math.random()*2);
+        const issued=s.issued+inc;
+        const nf=[...s.feed];
+        for(let n=s.issued+1;n<=issued;n++) nf.unshift(n);
+        return { issued, feed:nf.slice(0,8) };
+      });
+    },5000);
+  }
+  componentWillUnmount(){ clearInterval(this._t); clearInterval(this._i); }
+  setLang(l){ try{localStorage.setItem('hf_lang',l);}catch(e){} this.setState({lang:l}); }
+  check(){
+    const raw=(this.state.ticket||'').trim().toUpperCase().replace(/\s+/g,'');
+    const m=raw.match(/^HF-?(\d{1,6})$/);
+    if(!m){ this.setState({check:{ok:false,lucky:false,num:raw||'—'}}); return; }
+    const num=parseInt(m[1],10);
+    const ok=num>=1&&num<=this.state.issued;
+    const lucky=ok&&num%100===0;
+    this.setState({check:{ok,lucky,num:'HF-'+String(num).padStart(6,'0')}});
+  }
+  renderVals(){
+    const T=DICT[this.state.lang]||DICT.ru;
+    const sp=n=>n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,'\u2009');
+    const fmt=n=>'HF-'+String(n).padStart(6,'0');
+    const target=new Date('2026-07-22T00:00:00').getTime();
+    let diff=Math.max(0,target-this.state.now);
+    const d=Math.floor(diff/86400000); diff-=d*86400000;
+    const h=Math.floor(diff/3600000); diff-=h*3600000;
+    const mi=Math.floor(diff/60000); diff-=mi*60000;
+    const se=Math.floor(diff/1000);
+    const pad=x=>String(x).padStart(2,'0');
+    const nextLucky=(Math.floor(this.state.issued/100)+1)*100;
+    const tab=a=>'padding:7px 13px;border-radius:999px;font-weight:800;font-size:13px;letter-spacing:.04em;cursor:pointer;border:none;transition:all .2s;background:'+(a?'#C7F500':'transparent')+';color:'+(a?'#0B0B0B':'#fff')+';';
+    const c=this.state.check;
+    let resultStyle='',resultText='',resultIcon='',resultNum='';
+    if(c){
+      const bg=c.lucky?'#C7F500':(c.ok?'#14E06A':'#0B0B0B');
+      const fg=c.lucky?'#0B0B0B':'#fff';
+      resultStyle='background:'+bg+';color:'+fg+';border-radius:4px;padding:clamp(20px,3vw,28px);display:flex;align-items:center;gap:16px;';
+      resultText=c.ok?(c.lucky?T.check_lucky:T.check_ok):T.check_fail;
+      resultIcon=c.ok?'✓':'✕';
+      resultNum=c.num;
+    }
+    const feedStr=this.state.feed.map(fmt).join('\u2003✦\u2003')+'\u2003✦\u2003';
+    return {
+      t:T,
+      cd:{ d:pad(d), h:pad(h), m:pad(mi), s:pad(se) },
+      issuedFmt:sp(this.state.issued),
+      nextLuckyFmt:fmt(nextLucky),
+      langRu:()=>this.setLang('ru'), langEn:()=>this.setLang('en'), langSr:()=>this.setLang('sr'),
+      tabRu:tab(this.state.lang==='ru'), tabEn:tab(this.state.lang==='en'), tabSr:tab(this.state.lang==='sr'),
+      ticket:this.state.ticket,
+      onTicket:e=>this.setState({ticket:e.target.value,check:null}),
+      onTicketKey:e=>{ if(e.key==='Enter') this.check(); },
+      checkTicket:()=>this.check(),
+      showResult:!!c, resultStyle, resultText, resultIcon, resultNum,
+      feedStr,
+      latest1:fmt(this.state.feed[0]), latest2:fmt(this.state.feed[1]), latest3:fmt(this.state.feed[2])
+    };
+  }
+}
+</script>
+</body>
+</html>
